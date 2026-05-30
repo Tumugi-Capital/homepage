@@ -4,100 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>紬キャピタル | Tsumugi Capital</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Webフォント（Noto Sans JP） -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* フォントの適用 */
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
+        body { font-family: 'Noto Sans JP', sans-serif; overflow-x: hidden; }
+        
+        /* 動く背景のスタイル */
+        .animated-bg {
+            background: linear-gradient(-45deg, #0f172a, #1e3a8a, #0c4a6e, #111827);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            position: relative;
         }
-        /* ヒーローエリアのグラデーション */
-        .hero-gradient {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        /* カードのホバー時の滑らかな動き */
-        .product-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* 背景に浮遊する光の粒子（オシャレな動き） */
+        .particles { position: absolute; top: 0; left: 0; width: 100%; hieght: 100%; overflow: hidden; }
+        .particle {
+            position: absolute; display: block; list-style: none;
+            background: rgba(255, 255, 255, 0.1); border-radius: 50%;
+            animation: animateParticles linear infinite;
         }
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        @keyframes animateParticles {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 50%; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 20%; }
         }
+        /* 各粒子の設定（サイズと速度） */
+        .particle:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; animation-duration: 20s; }
+        .particle:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .particle:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; animation-duration: 18s; }
+        .particle:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 15s; }
+        .particle:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; animation-duration: 10s; }
+        .particle:nth-child(6) { left: 85%; width: 110px; height: 110px; animation-delay: 3s; animation-duration: 25s; }
+
+        /* プロダクトカードのホバーエフェクト */
+        .product-card { transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .product-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 30px 60px -12px rgba(50,50,93,0.25), 0 18px 36px -18px rgba(0,0,0,0.3); }
+        
+        /* スムーススクロール */
+        html { scroll-behavior: smooth; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 leading-relaxed tracking-wide antialiased">
+<body class="bg-gray-50 text-slate-800 antialiased font-normal tracking-wider">
 
-    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+    <!-- ヘッダー（すりガラス風） -->
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50 border-b border-gray-100">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-slate-800 tracking-widest">
+            <h1 class="text-3xl font-bold tracking-widest text-slate-900">
                 紬<span class="text-blue-600">キャピタル</span>
             </h1>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#services" class="text-sm font-medium text-gray-600 hover:text-blue-600 transition duration-200">プロダクト</a>
-                <a href="#about" class="text-sm font-medium text-gray-600 hover:text-blue-600 transition duration-200">私たちについて</a>
+            <nav class="hidden md:flex space-x-10">
+                <a href="#services" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition">プロダクト</a>
+                <a href="#about" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition">私たちについて</a>
+                <a href="#contact" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition">お問い合わせ</a>
             </nav>
         </div>
     </header>
 
-    <section class="hero-gradient text-white py-32 relative overflow-hidden">
-        <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-blob"></div>
-        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
+    <!-- ヒーローセクション（動く背景 + 粒子） -->
+    <section class="animated-bg text-white py-40 relative overflow-hidden">
+        <!-- 粒子エフェクトのHTML -->
+        <div class="particles">
+            <span class="particle"></span><span class="particle"></span><span class="particle"></span>
+            <span class="particle"></span><span class="particle"></span><span class="particle"></span>
+        </div>
         
         <div class="container mx-auto px-6 text-center relative z-10">
-            <h2 class="text-4xl md:text-6xl font-bold mb-8 leading-tight tracking-tight">
-                あなたの日常とビジネスに、<br class="hidden md:block">
-                技術が創る<span class="text-blue-400">「ゆとり」</span>と<span class="text-purple-400">「ワクワク」</span>を。
+            <span class="inline-block bg-blue-500/20 text-blue-200 text-xs font-bold tracking-widest uppercase px-4 py-1 rounded-full mb-6">
+                Bridging Business, Entertainment, and Technology
+            </span>
+            <h2 class="text-4xl md:text-7xl font-bold mb-10 leading-tight tracking-tighter">
+                あなたのビジネスとエンタメに、<br class="hidden md:block">
+                技術が創る<span class="text-blue-400">「ゆとり」</span>と<span class="text-cyan-400">「ワクワク」</span>を。
             </h2>
-            <p class="text-lg md:text-xl mb-12 text-blue-100 max-w-2xl mx-auto font-light">
-                ビジネスの効率化からエンタメまで。<br>テクノロジーの力で、明日をもっと便利に楽しくするSaaSを開発しています。
+            <p class="text-xl md:text-2xl mb-16 text-blue-100 max-w-3xl mx-auto font-light leading-relaxed">
+                経営企画の確かな視点と最新のプログラミング技術で、<br class="hidden md:block">明日をもっと便利に、そして紡ぎ出す未来を美しく彩るSaaSを開発しています。
             </p>
-            <a href="#services" class="inline-block bg-white text-blue-900 font-bold py-4 px-10 rounded-full hover:bg-blue-50 hover:shadow-lg hover:scale-105 transition duration-300">
-                プロダクトを見る
+            <a href="#services" class="inline-block bg-white text-blue-950 font-bold py-5 px-14 rounded-full hover:bg-blue-50 shadow-2xl hover:shadow-blue-500/30 hover:scale-105 transition duration-300 transform">
+                プロダクトの未来を見る
             </a>
+        </div>
+        <!-- 下部の波状デコレーション（オシャレな区切り） -->
+        <div class="absolute bottom-0 left-0 w-100% overflow-hidden leading-none z-0">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="relative block w-calc(100%+1.3px) h-20 text-gray-50 fill-current">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0Zm0,0"></path>
+            </svg>
         </div>
     </section>
 
-    <section id="services" class="py-24 bg-gray-50">
+    <!-- プロダクトセクション -->
+    <section id="services" class="py-32 bg-gray-50 relative">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <span class="text-sm font-bold tracking-widest text-blue-600 uppercase">Products</span>
-                <h2 class="text-3xl font-bold mt-2 text-slate-800">開発プロダクト</h2>
+            <div class="text-center mb-24">
+                <span class="text-sm font-bold tracking-widest text-blue-600 uppercase">Our Innovative Solutions</span>
+                <h2 class="text-4xl font-bold mt-3 text-slate-900 tracking-tight">開発プロダクト</h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 
-                <div class="product-card bg-white rounded-2xl p-8 border-t-4 border-blue-500">
-                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                <!-- 撮るだけ経理 -->
+                <div class="product-card bg-white rounded-3xl p-10 border border-gray-100 shadow-sm relative overflow-hidden group">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-8 relative z-10">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-slate-800">撮るだけ経理</h3>
-                    <p class="text-xs text-blue-600 mb-4 font-bold tracking-wider">個人事業主向け業務効率化SaaS</p>
-                    <p class="text-gray-600 text-sm leading-relaxed">
+                    <h3 class="text-2xl font-bold mb-3 text-slate-950 relative z-10">撮るだけ経理</h3>
+                    <p class="text-xs text-blue-600 mb-6 font-bold tracking-wider relative z-10">個人事業主向け業務効率化SaaS</p>
+                    <p class="text-slate-600 text-base leading-loose relative z-10">
                         月末の領収書の山からあなたを解放します。スマホで撮影するだけでAIが勘定科目を自動推測。面倒な仕訳作業をゼロにし、本業に集中できる環境を提供します。
                     </p>
                 </div>
 
-                <div class="product-card bg-white rounded-2xl p-8 border-t-4 border-green-500">
-                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <!-- 中央競馬速報 -->
+                <div class="product-card bg-white rounded-3xl p-10 border border-gray-100 shadow-sm relative overflow-hidden group">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-green-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-8 relative z-10">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-slate-800">中央競馬 払戻・動画速報</h3>
-                    <p class="text-xs text-green-600 mb-4 font-bold tracking-wider">エンタメ × 自動化ツール</p>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        週末の競馬チェックを完全自動化。重賞レースの映像や確定結果をLINEへ即時通知します。外出先でもサクッと確認でき、見逃しを防止して趣味の時間を充実させます。
+                    <h3 class="text-2xl font-bold mb-3 text-slate-950 relative z-10">中央競馬 払戻速報</h3>
+                    <p class="text-xs text-green-600 mb-6 font-bold tracking-wider relative z-10">エンタメ × 自動化ツール</p>
+                    <p class="text-slate-600 text-base leading-loose relative z-10">
+                        週末の趣味時間を完全自動化。確定結果をLINEへ即時通知します。外出先でもサクッと確認でき、見逃しを防止して趣味の時間をより豊かに充実させます。
                     </p>
                 </div>
 
-                <div class="product-card bg-white rounded-2xl p-8 border-t-4 border-purple-500">
-                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H14"></path></svg>
+                <!-- AIデイリーニュース -->
+                <div class="product-card bg-white rounded-3xl p-10 border border-gray-100 shadow-sm relative overflow-hidden group">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-purple-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-8 relative z-10">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H14"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-slate-800">AIデイリーニュース</h3>
-                    <p class="text-xs text-purple-600 mb-4 font-bold tracking-wider">情報収集の最適化ツール</p>
-                    <p class="text-gray-600 text-sm leading-relaxed">
+                    <h3 class="text-2xl font-bold mb-3 text-slate-950 relative z-10">AIニュース</h3>
+                    <p class="text-xs text-purple-600 mb-6 font-bold tracking-wider relative z-10">情報収集の最適化ツール</p>
+                    <p class="text-slate-600 text-base leading-loose relative z-10">
                         膨大な情報があふれる現代。あなたにとって本当に必要なニュースだけをAIが厳選し、毎日お届けします。情報収集にかかる時間を大幅に削減します。
                     </p>
                 </div>
@@ -106,22 +153,59 @@
         </div>
     </section>
 
-    <section id="about" class="bg-white py-24 border-t border-gray-100">
-        <div class="container mx-auto px-6 text-center">
-            <span class="text-sm font-bold tracking-widest text-slate-400 uppercase">About Us</span>
-            <h2 class="text-3xl font-bold mt-2 mb-10 text-slate-800">紬キャピタルについて</h2>
-            <div class="max-w-3xl mx-auto">
-                <p class="text-base text-gray-600 leading-loose mb-6 text-left">
-                    私たちは、企業における経営企画・経理の実務経験で培った「現場のリアルな視点」と、それを解決するための「最新のプログラミング技術」を掛け合わせたサービス開発を行っています。
-                </p>
-                <p class="text-base text-gray-600 leading-loose text-left">
-                    単なるシステム開発にとどまらず、ビジネスの効率化とエンターテインメントの架け橋となり、利用者の皆様の未来を明るく、さらに美しく紡ぎ出すことを目指しています。
-                </p>
+    <!-- アバウトセクション（人物アイコン追加） -->
+    <section id="about" class="bg-white py-32 border-t border-gray-100 relative">
+        <!-- オシャレな背景アクセント -->
+        <div class="absolute top-1/2 left-0 w-64 h-64 bg-blue-50 rounded-full filter blur-3xl opacity-60"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-16 items-center">
+                <!-- 人物（開発者）のイメージアイコン（オシャレなイラスト風） -->
+                <div class="md:col-span-2 text-center">
+                    <div class="relative inline-block">
+                        <div class="absolute inset-0 bg-blue-600 rounded-full scale-110 blur-2xl opacity-10"></div>
+                        <!-- 代替のオシャレなアバターSVG（ここを実際の写真に変更も可能です） -->
+                        <svg class="w-72 h-72 mx-auto text-blue-100" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="64" cy="64" r="64" fill="#EBF5FF"/>
+                            <path d="M101.333 104.533C101.333 104.533 96 85.3333 80 80C64 74.6667 64 80 64 80C64 80 64 74.6667 48 80C32 85.3333 26.6667 104.533 26.6667 104.533C26.6667 104.533 34.6667 120 64 120C93.3333 120 101.333 104.533 101.333 104.533Z" fill="#3182CE"/>
+                            <circle cx="64" cy="48" r="24" fill="#3182CE"/>
+                            <path d="M56 48L64 56L72 48" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <div class="absolute bottom-4 right-4 bg-white p-3 rounded-full shadow-lg">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-3">
+                    <span class="text-sm font-bold tracking-widest text-slate-400 uppercase">About Tsumugi Capital</span>
+                    <h2 class="text-4xl font-bold mt-3 mb-10 text-slate-900 tracking-tight">ビジネスと技術を、美しく紡ぐ。</h2>
+                    <p class="text-lg text-slate-700 leading-loose mb-8 font-light">
+                        私たちは、企業における経営企画・経理の実務経験で培った「現場のリアルな視点」と、それを解決するための「最新のプログラミング技術」を掛け合わせたサービス開発を行っています。
+                    </p>
+                    <p class="text-lg text-slate-700 leading-loose font-light">
+                        単なるシステム開発にとどまらず、ビジネスの効率化とエンターテインメントの架け橋となり、利用者の皆様の未来を밝고、さらに美しく紡ぎ出すことを目指しています。
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-slate-900 text-slate-400 py-10 text-center">
+    <!-- お問い合わせセクション（オシャレな誘導） -->
+    <section id="contact" class="py-24 animated-bg text-white border-t border-blue-900">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-8 tracking-tight">新しい未来を、一緒に紡ぎませんか？</h2>
+            <p class="text-xl mb-12 text-blue-100 max-w-2xl mx-auto font-light">
+                サービスのご利用、開発のご相談、コラボレーションの提案など、お気軽にお問い合わせください。
+            </p>
+            <a href="mailto:info@tsumugi-capital.llc" class="inline-block bg-cyan-400 text-blue-950 font-bold py-4 px-12 rounded-full hover:bg-cyan-300 shadow-lg transition duration-300 transform hover:scale-105">
+                info@tsumugi-capital.llc へメール
+            </a>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="bg-slate-950 text-slate-500 py-12 text-center border-t border-slate-900">
         <div class="container mx-auto px-6">
             <p class="text-sm tracking-wider">&copy; 2026 Tsumugi Capital LLC. All rights reserved.</p>
         </div>
