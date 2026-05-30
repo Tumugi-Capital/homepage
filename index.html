@@ -12,7 +12,7 @@
     <style>
         body { font-family: 'Noto Sans JP', sans-serif; overflow-x: hidden; }
         
-        /* 動く背景のスタイル（テック感と未来感） */
+        /* 動く背景のスタイル */
         .animated-bg {
             background: linear-gradient(-45deg, #0f172a, #1e3a8a, #0c4a6e, #111827);
             background-size: 400% 400%;
@@ -35,7 +35,7 @@
             0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 50%; }
             100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 20%; }
         }
-        /* 各粒子の設定（サイズと速度） */
+        /* 各粒子の設定 */
         .particle:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; animation-duration: 20s; }
         .particle:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
         .particle:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; animation-duration: 18s; }
@@ -73,27 +73,39 @@
         
         <div class="container mx-auto px-6 relative z-10 text-left md:pl-12">
             <div class="max-w-4xl">
-                <span class="inline-block bg-blue-500/20 text-blue-200 text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full mb-6">
+                <span class="inline-block bg-blue-500/20 text-blue-200 text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full mb-8">
                     Bridging Business, Entertainment, and Technology
                 </span>
                 
-                <h2 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-10 leading-snug md:leading-tight tracking-tighter">
-                    <span class="inline-block">あなたのビジネスと</span><br class="md:hidden">
-                    <span class="inline-block">エンタメに、</span><br>
-                    <span class="inline-block">技術が創る</span><span class="text-blue-400 inline-block">「ゆとり」</span><span class="inline-block">と</span><br class="md:hidden">
-                    <span class="text-cyan-400 inline-block">「ワクワク」</span><span class="inline-block">を。</span>
+                <h2 class="block md:hidden text-4xl sm:text-5xl font-bold mb-10 leading-snug tracking-tighter">
+                    あなたのビジネスと<br>
+                    エンタメに、<br>
+                    技術が創る<span class="text-blue-400">「ゆとり」</span>と<br>
+                    <span class="text-cyan-400">「ワクワク」</span>を。
                 </h2>
-                
-                <p class="text-base sm:text-lg md:text-2xl mb-12 text-blue-100 font-light leading-relaxed md:leading-loose">
-                    <span class="inline-block">経営企画の確かな視点と</span><span class="inline-block">最新のプログラミング技術で、</span><br class="hidden md:block">
-                    <span class="inline-block">明日をもっと便利に、</span><span class="inline-block">そして紡ぎ出す未来を美しく彩る</span><span class="inline-block">SaaSを開発しています。</span>
+                <p class="block md:hidden text-lg mb-12 text-blue-100 font-light leading-loose">
+                    経営企画の確かな視点と<br>
+                    最新のプログラミング技術で、<br>
+                    明日をもっと便利に、<br>
+                    そして紡ぎ出す未来を美しく彩る<br>
+                    SaaSを開発しています。
+                </p>
+
+                <h2 class="hidden md:block text-5xl lg:text-7xl font-bold mb-10 leading-tight tracking-tighter">
+                    あなたのビジネスとエンタメに、<br>
+                    技術が創る<span class="text-blue-400">「ゆとり」</span>と<span class="text-cyan-400">「ワクワク」</span>を。
+                </h2>
+                <p class="hidden md:block text-xl lg:text-2xl mb-12 text-blue-100 font-light leading-relaxed">
+                    経営企画の確かな視点と最新のプログラミング技術で、<br>
+                    明日をもっと便利に、そして紡ぎ出す未来を美しく彩るSaaSを開発しています。
                 </p>
                 
-                <a href="#services" class="inline-block bg-white text-blue-950 font-bold py-5 px-12 rounded-full hover:bg-blue-50 shadow-2xl hover:shadow-blue-500/30 hover:scale-105 transition duration-300 transform">
+                <a href="#services" class="inline-block bg-white text-blue-950 font-bold py-5 px-12 rounded-full hover:bg-blue-50 shadow-2xl hover:shadow-blue-500/30 hover:scale-105 transition duration-300 transform mt-2">
                     プロダクトの未来を見る
                 </a>
             </div>
         </div>
+        
         <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-0">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="relative block w-full h-20 text-gray-50 fill-current">
                 <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0Zm0,0"></path>
@@ -113,7 +125,9 @@
                 <div class="product-card bg-white rounded-3xl p-10 border border-gray-100 shadow-sm relative overflow-hidden group">
                     <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-50 rounded-full group-hover:scale-150 transition-transform duration-500 z-0"></div>
                     <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-8 relative z-10">
-                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
                     </div>
                     <h3 class="text-2xl font-bold mb-3 text-slate-950 relative z-10">撮るだけ経理</h3>
                     <p class="text-xs text-blue-600 mb-6 font-bold tracking-wider relative z-10">個人事業主向け業務効率化SaaS</p>
@@ -125,11 +139,8 @@
                 <div class="product-card bg-white rounded-3xl p-10 border border-gray-100 shadow-sm relative overflow-hidden group">
                     <div class="absolute -top-10 -right-10 w-32 h-32 bg-green-50 rounded-full group-hover:scale-150 transition-transform duration-500 z-0"></div>
                     <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-8 relative z-10">
-                        <svg class="w-8 h-8 text-green-600" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M12 3l1 2v5l3 3h3c.828 0 1.5 .672 1.5 1.5v4.5l-3 1v3h-4v-3l-2 -3l-3 1l-2 -2v-3l3 -3z" />
-                            <path d="M7 10l5 -5" />
-                            <path d="M13.5 11.5l1.5 -1.5" />
+                        <svg class="w-10 h-10 text-green-600" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 22H5V20H19V22M17 10C15.89 10 15 9.11 15 8S15.89 6 17 6 19 6.9 19 8 18.11 10 17 10M14 18L13 13L15 11C15 11 18 10 18 7C18 3.5 14.5 2 12.5 2L10 6L9 9H5V11L9 15.5V18H14Z" />
                         </svg>
                     </div>
                     <h3 class="text-2xl font-bold mb-3 text-slate-950 relative z-10">中央競馬 払戻速報</h3>
@@ -142,7 +153,7 @@
                 <div class="product-card bg-white rounded-3xl p-10 border border-gray-100 shadow-sm relative overflow-hidden group">
                     <div class="absolute -top-10 -right-10 w-32 h-32 bg-purple-50 rounded-full group-hover:scale-150 transition-transform duration-500 z-0"></div>
                     <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-8 relative z-10">
-                        <svg class="w-8 h-8 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="w-10 h-10 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 8V4H8"/>
                             <rect width="16" height="12" x="4" y="8" rx="2"/>
                             <path d="M2 14h2"/>
