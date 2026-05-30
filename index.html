@@ -12,7 +12,7 @@
     <style>
         body { font-family: 'Noto Sans JP', sans-serif; overflow-x: hidden; }
         
-        /* 動く背景のスタイル（テック感と未来感） */
+        /* 動く背景のスタイル */
         .animated-bg {
             background: linear-gradient(-45deg, #0f172a, #1e3a8a, #0c4a6e, #111827);
             background-size: 400% 400%;
@@ -35,7 +35,7 @@
             0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 50%; }
             100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 20%; }
         }
-        /* 各粒子の設定（サイズと速度） */
+        /* 各粒子の設定 */
         .particle:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; animation-duration: 20s; }
         .particle:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
         .particle:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; animation-duration: 18s; }
@@ -72,17 +72,21 @@
         </div>
         
         <div class="container mx-auto px-6 relative z-10 text-left md:pl-12">
-            <div class="max-w-4xl">
+            <div class="max-w-5xl">
                 <span class="inline-block bg-blue-500/20 text-blue-200 text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full mb-6">
                     Bridging Business, Entertainment, and Technology
                 </span>
-                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-10 leading-tight tracking-tighter">
-                    あなたのビジネスとエンタメに、<br>
-                    技術が創る<span class="text-blue-400">「ゆとり」</span>と<span class="text-cyan-400">「ワクワク」</span>を。
+                
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-10 leading-tight tracking-tighter">
+                    <span class="inline-block">あなたのビジネスとエンタメに、</span><br>
+                    <span class="inline-block">技術が創る</span><span class="text-blue-400 inline-block">「ゆとり」</span><span class="inline-block">と</span><span class="text-cyan-400 inline-block">「ワクワク」</span><span class="inline-block">を。</span>
                 </h2>
+                
                 <p class="text-xl md:text-2xl mb-12 text-blue-100 font-light leading-relaxed">
-                    経営企画の確かな視点と最新のプログラミング技術で、<br class="hidden md:block">明日をもっと便利に、そして紡ぎ出す未来を美しく彩るSaaSを開発しています。
+                    <span class="inline-block">経営企画の確かな視点と最新のプログラミング技術で、</span><br class="hidden md:block">
+                    <span class="inline-block">明日をもっと便利に、</span><span class="inline-block">そして紡ぎ出す未来を美しく彩る</span><span class="inline-block">SaaSを開発しています。</span>
                 </p>
+                
                 <a href="#services" class="inline-block bg-white text-blue-950 font-bold py-5 px-12 rounded-full hover:bg-blue-50 shadow-2xl hover:shadow-blue-500/30 hover:scale-105 transition duration-300 transform">
                     プロダクトの未来を見る
                 </a>
