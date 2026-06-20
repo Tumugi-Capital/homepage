@@ -1,313 +1,382 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>紬キャピタル合同会社 | Tsumugi Capital LLC</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* ベースフォントを標準の太さに設定 */
-        body { font-family: 'Noto Sans JP', sans-serif; overflow-x: hidden; }
-        
-        /* 動く背景：上品なニュアンスカラーのグラデーション */
-        .animated-bg {
-            background: linear-gradient(-45deg, #020617, #0f172a, #111827, #1e293b);
-            background-size: 400% 400%;
-            animation: gradientAnimation 18s ease infinite;
-            position: relative;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>紬キャピタル合同会社 | Tsumugi Capital LLC</title>
+  <meta name="description" content="紬キャピタル合同会社は、経営企画・経理の実務視点とプログラミング技術を掛け合わせ、日々の業務と生活を少し軽くするSaaSを開発する会社です。" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#18212f',
+            mist: '#f6f8fb',
+            line: '#e6ebf2',
+            blue: {
+              50: '#eef7ff',
+              100: '#d9edff',
+              500: '#2f80ed',
+              600: '#1f6fd8',
+              700: '#185bb3'
+            },
+            teal: {
+              50: '#ecfbf8',
+              500: '#1aa892',
+              600: '#0f8b79'
+            },
+            gold: {
+              50: '#fff8e5',
+              500: '#c99424'
+            }
+          },
+          boxShadow: {
+            calm: '0 18px 50px rgba(24, 33, 47, 0.08)',
+            lift: '0 24px 70px rgba(24, 33, 47, 0.13)'
+          }
         }
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* 背景に浮遊する光の粒子 */
-        .particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; }
-        .particle {
-            position: absolute; display: block; list-style: none;
-            background: rgba(255, 255, 255, 0.05); border-radius: 50%;
-            animation: animateParticles linear infinite;
-        }
-        @keyframes animateParticles {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
-            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
-        }
-        .particle:nth-child(1) { left: 25%; width: 60px; height: 60px; animation-duration: 25s; }
-        .particle:nth-child(2) { left: 10%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 15s; }
-        .particle:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; animation-duration: 20s; }
-        .particle:nth-child(4) { left: 85%; width: 90px; height: 90px; animation-delay: 3s; animation-duration: 30s; }
-
-        /* プロダクトカード：ホバーエフェクトを滑らかに */
-        .product-card { transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01), 0 2px 4px -1px rgba(0,0,0,0.01); }
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.02); }
-        
-        /* スムーススクロール */
-        html { scroll-behavior: smooth; }
-        
-        /* FAQアコーディオン：デフォルトマーカーを消す */
-        details > summary { list-style: none; }
-        details > summary::-webkit-details-marker { display: none; }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-break: strict;
+    }
+    p, h1, h2, h3, li { text-wrap: pretty; }
+    .mesh {
+      background:
+        radial-gradient(circle at 16% 18%, rgba(47, 128, 237, 0.13), transparent 30%),
+        radial-gradient(circle at 90% 6%, rgba(26, 168, 146, 0.12), transparent 28%),
+        linear-gradient(135deg, #ffffff 0%, #f6f8fb 54%, #edf5ff 100%);
+    }
+    .gridline {
+      background-image:
+        linear-gradient(rgba(24,33,47,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24,33,47,.05) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 82%);
+    }
+    .card {
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(47, 128, 237, .32);
+      box-shadow: 0 24px 70px rgba(24, 33, 47, 0.13);
+    }
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased tracking-wide font-normal">
+<body class="bg-mist text-ink antialiased">
 
-    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            
-            <a href="#" class="flex flex-col justify-center group">
-                <span class="text-[10px] md:text-xs text-slate-400 font-bold tracking-[0.2em] mb-0.5 group-hover:text-blue-600 transition-colors duration-300">
-                    未来を紡ぐ、技術のチカラ。
-                </span>
-                <h1 class="text-xl md:text-2xl font-bold tracking-widest">
-                    紬<span class="text-blue-700 font-bold">キャピタル</span><span class="text-black font-bold">合同会社</span>
-                </h1>
+  <header class="sticky top-0 z-50 border-b border-line/80 bg-white/86 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+      <a href="#" class="group block" aria-label="紬キャピタル合同会社 トップへ">
+        <p class="text-[10px] font-bold uppercase tracking-[0.26em] text-blue-600 transition group-hover:text-teal-600">Technology that leaves room</p>
+        <h1 class="mt-1 text-lg font-extrabold tracking-[0.16em] text-ink sm:text-xl">
+          紬キャピタル<span class="text-blue-600">合同会社</span>
+        </h1>
+      </a>
+
+      <nav class="hidden items-center gap-8 md:flex">
+        <a href="#products" class="text-xs font-bold tracking-[0.18em] text-slate-600 transition hover:text-blue-600">PRODUCT</a>
+        <a href="#about" class="text-xs font-bold tracking-[0.18em] text-slate-600 transition hover:text-blue-600">ABOUT</a>
+        <a href="#faq" class="text-xs font-bold tracking-[0.18em] text-slate-600 transition hover:text-blue-600">FAQ</a>
+        <a href="#contact" class="rounded-full bg-ink px-5 py-2.5 text-xs font-bold tracking-[0.16em] text-white transition hover:bg-blue-700">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="mesh relative overflow-hidden border-b border-line">
+      <div class="gridline pointer-events-none absolute inset-0"></div>
+      <div class="mx-auto grid max-w-7xl gap-14 px-5 py-20 lg:grid-cols-[1.08fr_.92fr] lg:items-center lg:px-8 lg:py-28">
+        <div class="relative z-10">
+          <div class="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/78 px-4 py-2 text-xs font-bold tracking-[0.14em] text-blue-700 shadow-sm">
+            <span class="h-2 w-2 rounded-full bg-teal-500"></span>
+            BUSINESS, ENTERTAINMENT AND TECHNOLOGY
+          </div>
+
+          <h2 class="mt-8 max-w-4xl text-[2.4rem] font-black leading-[1.14] tracking-tight text-ink sm:text-6xl lg:text-7xl">
+            日々の生活に、<br class="hidden sm:block" />
+            技術で<span class="text-blue-600">ゆとり</span>を紡ぎだす。
+          </h2>
+
+          <p class="mt-7 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+            紬キャピタルは、経営企画・経理の実務視点とプログラミング技術を掛け合わせ、面倒な作業を軽くし、使う人の時間を本来の仕事や楽しみに戻すSaaSを開発しています。
+          </p>
+
+          <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+            <a href="#products" class="inline-flex items-center justify-center rounded-full bg-blue-600 px-7 py-4 text-sm font-bold tracking-[0.14em] text-white shadow-calm transition hover:-translate-y-0.5 hover:bg-blue-700">
+              PRODUCTSを見る
             </a>
-
-            <nav class="hidden md:flex space-x-10 items-center mt-2">
-                <a href="#services" class="text-sm font-bold text-slate-600 hover:text-blue-700 transition tracking-widest">PRODUCT</a>
-                <a href="#about" class="text-sm font-bold text-slate-600 hover:text-blue-700 transition tracking-widest">ABOUT US</a>
-                <a href="#faq" class="text-sm font-bold text-slate-600 hover:text-blue-700 transition tracking-widest">FAQ</a>
-                <a href="#contact" class="text-sm font-bold text-slate-600 hover:text-blue-700 transition tracking-widest">CONTACT</a>
-            </nav>
+            <a href="#about" class="inline-flex items-center justify-center rounded-full border border-line bg-white/80 px-7 py-4 text-sm font-bold tracking-[0.14em] text-ink transition hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-700">
+              会社について
+            </a>
+          </div>
         </div>
-    </header>
 
-    <section class="animated-bg text-white py-24 md:py-32 relative overflow-hidden border-b border-slate-900/50">
-        <div class="particles">
-            <span class="particle"></span><span class="particle"></span>
-            <span class="particle"></span><span class="particle"></span>
-        </div>
-        
-        <div class="container mx-auto px-6 relative z-10 text-left md:pl-16">
-            <div class="max-w-6xl">
-                <span class="inline-block border border-blue-400/30 text-blue-200 text-xs font-bold tracking-[0.2em] uppercase px-5 py-2.5 rounded-full mb-8">
-                    Bridging Business, Entertainment, and Technology
-                </span>
-                
-                <h2 class="block md:hidden text-3xl font-bold mb-8 leading-snug tracking-tight">
-                    あなたのビジネスと<br>
-                    エンタメに、<br>
-                    技術が創る<span class="text-blue-400">「ゆとり」</span><br>
-                    <span class="whitespace-nowrap">と<span class="text-blue-400">「ワクワク」</span>を。</span>
-                </h2>
-                
-                <p class="block md:hidden text-base mb-10 text-blue-100 font-medium leading-loose tracking-wider">
-                    企業実務で培った確かな視点と<br>
-                    最新のプログラミング技術で、<br>
-                    明日をもっと便利に、<br>
-                    そして紡ぎ出す未来を美しく彩る<br>
-                    SaaSを開発しています。
-                </p>
-
-                <h2 class="hidden md:block text-4xl lg:text-5xl xl:text-6xl font-bold mb-10 leading-snug tracking-tight">
-                    <span class="inline-block">あなたのビジネスとエンタメに、</span><br>
-                    <span class="inline-block">技術が創る<span class="text-blue-400">「ゆとり」</span>と<span class="text-blue-400">「ワクワク」</span>を。</span>
-                </h2>
-                
-                <p class="hidden md:block text-lg lg:text-xl xl:text-2xl mb-12 text-blue-100 font-medium leading-relaxed tracking-wider">
-                    <span class="inline-block">企業実務で培った確かな視点と最新のプログラミング技術で、</span><br>
-                    <span class="inline-block">明日をもっと便利に、そして紡ぎ出す未来を美しく彩るSaaSを開発しています。</span>
-                </p>
-                
-                <a href="#services" class="inline-block bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold py-4 px-12 rounded-full hover:bg-white/20 shadow-lg hover:shadow-blue-500/20 hover:scale-105 transition duration-500 transform tracking-widest text-sm">
-                    VIEW PRODUCTS
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="py-24 bg-slate-50 relative">
-        <div class="container mx-auto px-6 text-left relative z-10">
-            <div class="mb-16 text-center">
-                <span class="text-sm font-bold tracking-widest text-blue-700 uppercase">Our Innovative Solutions</span>
-                <h2 class="text-4xl font-bold mt-3 text-slate-950 tracking-tight">開発プロダクト</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                
-                <div class="product-card bg-white rounded-3xl p-10 border border-slate-100 relative overflow-hidden group">
-                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-blue-50/50 rounded-full group-hover:scale-150 transition-transform duration-700 z-0"></div>
-                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-8 relative z-10">
-                        <svg class="w-9 h-9 text-blue-700" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                            <path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-slate-950 relative z-10">撮るだけ経理</h3>
-                    <p class="text-xs text-blue-700 mb-6 font-bold tracking-widest relative z-10 uppercase">AccountingaaS for Freelancers</p>
-                    <p class="text-slate-600 text-base leading-loose relative z-10">
-                        月末の領収書の山からあなたを解放します。スマホで撮影するだけでAIが勘定科目を自動推測。面倒な仕訳作業をゼロにし、本業に集中できる環境を提供します。
-                    </p>
+        <div class="relative z-10">
+          <div class="rounded-[2rem] border border-white bg-white/72 p-4 shadow-lift backdrop-blur">
+            <div class="rounded-[1.5rem] border border-line bg-white p-6">
+              <div class="flex items-center justify-between border-b border-line pb-5">
+                <div>
+                  <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Operating Theme</p>
+                  <p class="mt-2 text-xl font-extrabold text-ink">Small automation, real relief.</p>
                 </div>
-
-                <div class="product-card bg-white rounded-3xl p-10 border border-slate-100 relative overflow-hidden group">
-                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-green-50/50 rounded-full group-hover:scale-150 transition-transform duration-700 z-0"></div>
-                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-8 relative z-10">
-                        <svg class="w-9 h-9 text-green-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 3a9 9 0 0 0-9 9v9h1.5a1.5 1.5 0 0 0 1.5-1.5V12a6 6 0 0 1 12 0v7.5a1.5 1.5 0 0 0 1.5 1.5H21v-9a9 9 0 0 0-9-9z"></path>
-                            <circle cx="7.5" cy="13.5" r="1.2" fill="currentColor" stroke="none"></circle>
-                            <circle cx="7.5" cy="18.5" r="1.2" fill="currentColor" stroke="none"></circle>
-                            <circle cx="16.5" cy="13.5" r="1.2" fill="currentColor" stroke="none"></circle>
-                            <circle cx="16.5" cy="18.5" r="1.2" fill="currentColor" stroke="none"></circle>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-slate-950 relative z-10">中央競馬 払戻動画速報</h3>
-                    <p class="text-xs text-green-600 mb-6 font-bold tracking-widest relative z-10 uppercase">Entertainment Automatons</p>
-                    <p class="text-slate-600 text-base leading-loose relative z-10">
-                        週末の趣味時間を完全自動化。中央競馬の確定結果をLINEへ即時通知します。外出先でもサクッと確認でき、見逃しを防止して趣味の時間をより豊かに充実させます。
-                    </p>
+                <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+                  <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 3v18"></path>
+                    <path d="M5 8h14"></path>
+                    <path d="M5 16h14"></path>
+                    <path d="m7 4 10 16"></path>
+                  </svg>
                 </div>
+              </div>
 
-                <div class="product-card bg-white rounded-3xl p-10 border border-slate-100 relative overflow-hidden group">
-                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-purple-50/50 rounded-full group-hover:scale-150 transition-transform duration-700 z-0"></div>
-                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-8 relative z-10">
-                        <svg class="w-9 h-9 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 8V4H8"></path>
-                            <rect width="16" height="12" x="4" y="8" rx="2"></rect>
-                            <path d="M2 14h2"></path>
-                            <path d="M20 14h2"></path>
-                            <path d="M15 13v2"></path>
-                            <path d="M9 13v2"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3 text-slate-950 relative z-10">AIデイリーニュース</h3>
-                    <p class="text-xs text-purple-600 mb-6 font-bold tracking-wider relative z-10 uppercase">AI Daily News Curation</p>
-                    <p class="text-slate-600 text-base leading-loose relative z-10">
-                        膨大な情報があふれる現代。あなたにとって本当に必要なニュースだけをAIが厳選し、毎日お届けします。情報収集にかかる時間を大幅に削減します。
-                    </p>
+              <div class="mt-6 grid gap-3">
+                <div class="rounded-2xl bg-blue-50 p-4">
+                  <p class="text-sm font-bold text-blue-700">01. 業務の負担を減らす</p>
+                  <p class="mt-1 text-sm leading-6 text-slate-600">領収書処理や情報整理など、後回しになりがちな作業を軽くします。</p>
                 </div>
-
+                <div class="rounded-2xl bg-teal-50 p-4">
+                  <p class="text-sm font-bold text-teal-600">02. 趣味の時間を豊かにする</p>
+                  <p class="mt-1 text-sm leading-6 text-slate-600">エンタメ領域でも、確認や通知の手間を自動化します。</p>
+                </div>
+                <div class="rounded-2xl bg-gold-50 p-4">
+                  <p class="text-sm font-bold text-gold-500">03. 必要な情報だけ届ける</p>
+                  <p class="mt-1 text-sm leading-6 text-slate-600">AIを使い、膨大な情報から日々の判断に役立つものを絞り込みます。</p>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </section>
 
-    <section id="about" class="bg-white py-24 border-t border-slate-100 relative overflow-hidden">
-        <div class="absolute top-1/2 left-0 w-80 h-80 bg-blue-50/50 rounded-full filter blur-3xl opacity-60"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-4xl mx-auto text-left">
-                <span class="text-sm font-bold tracking-widest text-slate-400 uppercase">About Tsumugi Capital LLC</span>
-                <h2 class="text-4xl font-bold mt-3 mb-10 text-slate-950 tracking-tight">ビジネスと技術を、美しく紡ぐ。</h2>
-                <p class="text-lg lg:text-xl text-slate-700 leading-loose mb-6 font-medium">
-                    私たちは、企業における経営企画・経理の実務経験で培った「現場のリアルな視点」と、それを解決するための「最新のプログラミング技術」を掛け合わせたサービス開発を行っています。
-                </p>
-                <p class="text-lg lg:text-xl text-slate-700 leading-loose font-medium">
-                    単なるシステム開発にとどまらず、ビジネスの効率化とエンターテインメントの架け橋となり、利用者の皆様の未来を明るく、さらに美しく紡ぎ出すことを目指しています。
-                </p>
-            </div>
+    <section id="products" class="bg-white py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <p class="text-xs font-black uppercase tracking-[0.24em] text-blue-600">Our Products</p>
+            <h2 class="mt-3 text-3xl font-black tracking-tight text-ink sm:text-5xl">開発プロダクト</h2>
+          </div>
+          <p class="max-w-xl text-sm leading-7 text-slate-600">
+            大きな機能を足すより、毎日の小さな面倒をきちんと減らす。そんな思想で、実務と生活に近いプロダクトを育てています。
+          </p>
         </div>
+
+        <div class="mt-12 grid gap-5 md:grid-cols-3">
+          <article class="card rounded-[1.6rem] border border-line bg-white p-7 shadow-calm">
+            <div class="mb-7 flex items-start justify-between gap-4">
+              <div class="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.6rem] bg-gradient-to-br from-blue-50 to-white text-blue-600 shadow-calm ring-1 ring-blue-100">
+                <span class="absolute -right-1.5 -top-1.5 h-5 w-5 rounded-full bg-teal-50 ring-4 ring-white"></span>
+                <span class="absolute bottom-3 right-3 h-2.5 w-2.5 rounded-full bg-blue-200"></span>
+                <svg class="relative h-10 w-10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                  <path d="M9 7h6"></path>
+                  <path d="M9 11h6"></path>
+                  <path d="M9 15h2"></path>
+                  <path d="M14 15h1"></path>
+                </svg>
+              </div>
+              <span class="rounded-full bg-blue-50 px-3 py-1 text-[11px] font-bold tracking-[0.14em] text-blue-700">ACCOUNTING</span>
+            </div>
+            <h3 class="text-2xl font-black text-ink">撮るだけ経理</h3>
+            <p class="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Accounting SaaS for small business</p>
+            <p class="mt-5 text-sm leading-8 text-slate-600">
+              LINEに領収書を送るだけで、AIが内容を読み取り、仕訳候補の作成からMoney Forwardへの記帳・証憑添付までをサポートします。
+            </p>
+          </article>
+
+          <article class="card rounded-[1.6rem] border border-line bg-white p-7 shadow-calm">
+            <div class="mb-7 flex items-start justify-between gap-4">
+              <div class="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.6rem] bg-gradient-to-br from-teal-50 to-white text-teal-600 shadow-calm ring-1 ring-teal-100">
+                <span class="absolute -right-1.5 -top-1.5 h-5 w-5 rounded-full bg-blue-50 ring-4 ring-white"></span>
+                <span class="absolute bottom-3 right-3 h-2.5 w-2.5 rounded-full bg-teal-200"></span>
+                <svg class="relative h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 3a9 9 0 0 0-9 9v8h3v-8a6 6 0 0 1 12 0v8h3v-8a9 9 0 0 0-9-9z"></path>
+                  <path d="M8 14h.01"></path>
+                  <path d="M16 14h.01"></path>
+                  <path d="M8 18h.01"></path>
+                  <path d="M16 18h.01"></path>
+                  <path d="M10 7h4"></path>
+                </svg>
+              </div>
+              <span class="rounded-full bg-teal-50 px-3 py-1 text-[11px] font-bold tracking-[0.14em] text-teal-600">ENTERTAINMENT</span>
+            </div>
+            <h3 class="text-2xl font-black text-ink">中央競馬 払戻動画速報</h3>
+            <p class="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Entertainment automation</p>
+            <p class="mt-5 text-sm leading-8 text-slate-600">
+              中央競馬の確定結果をLINEへ即時通知。外出先でも結果を確認しやすく、週末の趣味時間をよりスムーズに楽しめるようにします。
+            </p>
+          </article>
+
+          <article class="card rounded-[1.6rem] border border-line bg-white p-7 shadow-calm">
+            <div class="mb-7 flex items-start justify-between gap-4">
+              <div class="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.6rem] bg-gradient-to-br from-gold-50 to-white text-gold-500 shadow-calm ring-1 ring-yellow-100">
+                <span class="absolute -right-1.5 -top-1.5 h-5 w-5 rounded-full bg-blue-50 ring-4 ring-white"></span>
+                <span class="absolute bottom-3 right-3 h-2.5 w-2.5 rounded-full bg-yellow-200"></span>
+                <svg class="relative h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 5h14"></path>
+                  <path d="M5 10h14"></path>
+                  <path d="M5 15h8"></path>
+                  <path d="M17 15l2 2"></path>
+                  <path d="M19 15l-2 2"></path>
+                  <path d="M8 20h8"></path>
+                </svg>
+              </div>
+              <span class="rounded-full bg-gold-50 px-3 py-1 text-[11px] font-bold tracking-[0.14em] text-gold-500">AI CURATION</span>
+            </div>
+            <h3 class="text-2xl font-black text-ink">AIデイリーニュース</h3>
+            <p class="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">AI daily news curation</p>
+            <p class="mt-5 text-sm leading-8 text-slate-600">
+              あふれるニュースの中から、必要な情報だけをAIが整理。毎日の情報収集にかかる時間を減らし、判断の土台を整えます。
+            </p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section id="faq" class="bg-slate-50 py-24 border-t border-slate-100 relative overflow-hidden">
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="mb-12 text-center">
-                <span class="text-sm font-bold tracking-widest text-blue-700 uppercase">FAQ</span>
-                <h2 class="text-3xl font-bold mt-3 text-slate-950 tracking-tight">よくあるご質問</h2>
-                <p class="mt-4 text-slate-600 text-base">紬キャピタルへ寄せられるご質問とその解決方法をご案内いたします。</p>
-            </div>
-            
-            <div class="max-w-3xl mx-auto space-y-4 cursor-pointer">
-                
-                <details class="group bg-white border border-slate-100 rounded-3xl shadow-sm overflow-hidden">
-                    <summary class="flex justify-between items-center font-bold p-6 text-slate-800 hover:text-blue-700 transition duration-300">
-                        <span class="tracking-wide">Q. サービスの利用料金について教えてください。</span>
-                        <span class="transition-transform duration-500 group-open:rotate-180 text-blue-500">
-                            <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-slate-600 text-base leading-loose border-t border-slate-50 pt-4">
-                        各サービスのご利用条件はプロダクトごとに異なります。中央競馬 払戻動画速報及びAIニュースは無料で提供しており、撮るだけ経理につきましては、サービスサイトにて詳細を記載しております。
-                    </div>
-                </details>
-
-                <details class="group bg-white border border-slate-100 rounded-3xl shadow-sm overflow-hidden">
-                    <summary class="flex justify-between items-center font-bold p-6 text-slate-800 hover:text-blue-700 transition duration-300">
-                        <span class="tracking-wide">Q. 「撮るだけ経理」は法人決算にも対応していますか？</span>
-                        <span class="transition-transform duration-500 group-open:rotate-180 text-blue-500">
-                            <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-slate-600 text-base leading-loose border-t border-slate-50 pt-4">
-                        本システムは、主にフリーランスや個人事業主様の日常的な記帳業務の自動化を目的として設計されています。法人向けの複雑な決算処理や税務申告等の機能は現在提供しておりません。
-                    </div>
-                </details>
-
-                <details class="group bg-white border border-slate-100 rounded-3xl shadow-sm overflow-hidden">
-                    <summary class="flex justify-between items-center font-bold p-6 text-slate-800 hover:text-blue-700 transition duration-300">
-                        <span class="tracking-wide">Q. 新規のシステム開発はお受けしていますか？</span>
-                        <span class="transition-transform duration-500 group-open:rotate-180 text-blue-500">
-                            <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-slate-600 text-base leading-loose border-t border-slate-50 pt-4">
-                        現在、弊社では自社プロダクトの開発および自動化モデルの運営にリソースを集中しておりますため、外部企業様からの個別のシステム開発案件（受託開発）はお受けしておりません。何卒ご了承ください。
-                    </div>
-                </details>
-
-                <details class="group bg-white border border-slate-100 rounded-3xl shadow-sm overflow-hidden">
-                    <summary class="flex justify-between items-center font-bold p-6 text-slate-800 hover:text-blue-700 transition duration-300">
-                        <span class="tracking-wide">Q. サービスの退会方法を教えてください。</span>
-                        <span class="transition-transform duration-500 group-open:rotate-180 text-blue-500">
-                            <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-slate-600 text-base leading-loose border-t border-slate-50 pt-4">
-                        LINE公式アカウントのメニュー内にある「設定・連携解除」からいつでも即座に停止が可能です。
-                    </div>
-                </details>
-                
-            </div>
+    <section id="about" class="border-y border-line bg-mist py-20 lg:py-24">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[.85fr_1.15fr] lg:px-8">
+        <div>
+          <p class="text-xs font-black uppercase tracking-[0.24em] text-blue-600">About Tsumugi Capital</p>
+          <h2 class="mt-3 text-3xl font-black leading-tight tracking-tight text-ink sm:text-5xl">現場の感覚と、技術の実装力を紡ぐ。</h2>
         </div>
+        <div class="rounded-[1.6rem] border border-line bg-white p-7 shadow-calm lg:p-10">
+          <p class="text-lg leading-9 text-slate-700">
+            私たちは、企業における経営企画・経理の実務経験で培った「現場のリアルな視点」と、それを解決するための「プログラミング技術」を掛け合わせたサービス開発を行っています。
+          </p>
+          <p class="mt-6 text-lg leading-9 text-slate-700">
+            単なるシステム開発にとどまらず、ビジネスの効率化とエンターテインメントの体験向上を通じて、利用者の皆様の時間と選択肢を少しずつ広げていくことを目指しています。
+          </p>
+          <div class="mt-8 grid gap-3 sm:grid-cols-3">
+            <div class="rounded-2xl bg-blue-50 p-4">
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Viewpoint</p>
+              <p class="mt-2 font-black text-ink">実務起点</p>
+            </div>
+            <div class="rounded-2xl bg-teal-50 p-4">
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-teal-600">Build</p>
+              <p class="mt-2 font-black text-ink">小さく早く改善</p>
+            </div>
+            <div class="rounded-2xl bg-gold-50 p-4">
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-gold-500">Goal</p>
+              <p class="mt-2 font-black text-ink">時間を取り戻す</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="contact" class="animated-bg text-white py-24 border-t border-slate-800 relative overflow-hidden">
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="mb-12 text-center">
-                <span class="text-sm font-bold tracking-widest text-blue-400 uppercase">Contact</span>
-                <h2 class="text-3xl font-bold mt-2 tracking-tight">お問い合わせ</h2>
-                <p class="mt-4 text-blue-200/80 text-sm md:text-base">ご不明な点やご相談がございましたら、以下のフォームよりお気軽にお尋ねください。</p>
-            </div>
-            
-            <div class="max-w-2xl mx-auto bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-xl">
-                <form action="https://formspree.io/f/mgoqbker" method="POST" class="space-y-6 text-left">
-                    <div>
-                        <label for="name" class="block text-sm font-bold text-blue-200 mb-2">お名前 <span class="text-red-400 text-xs">※必須</span></label>
-                        <input type="text" id="name" name="name" required class="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition duration-200" placeholder="山田 太郎">
-                    </div>
-                    
-                    <div>
-                        <label for="company" class="block text-sm font-bold text-blue-200 mb-2">会社名</label>
-                        <input type="text" id="company" name="company" class="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition duration-200" placeholder="〇〇株式会社">
-                    </div>
-                    
-                    <div>
-                        <label for="email" class="block text-sm font-bold text-blue-200 mb-2">メールアドレス <span class="text-red-400 text-xs">※必須</span></label>
-                        <input type="email" id="email" name="email" required class="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition duration-200" placeholder="example@tsumugi-capital.llc">
-                    </div>
-                    
-                    <div>
-                        <label for="message" class="block text-sm font-bold text-blue-200 mb-2">お問い合わせ内容 <span class="text-red-400 text-xs">※必須</span></label>
-                        <textarea id="message" name="message" rows="5" required class="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition duration-200 resize-none" placeholder="ご質問やご相談内容をご記入ください。"></textarea>
-                    </div>
-                    
-                    <div class="text-center pt-2">
-                        <button type="submit" class="inline-block bg-white text-blue-950 font-bold py-4 px-12 rounded-full hover:bg-blue-50 shadow-lg hover:shadow-blue-500/10 hover:scale-105 transition duration-300 transform tracking-widest text-sm">
-                            内容を送信する
-                        </button>
-                    </div>
-                </form>
-            </div>
+    <section id="faq" class="bg-white py-20 lg:py-24">
+      <div class="mx-auto max-w-4xl px-5 lg:px-8">
+        <div class="text-center">
+          <p class="text-xs font-black uppercase tracking-[0.24em] text-blue-600">FAQ</p>
+          <h2 class="mt-3 text-3xl font-black tracking-tight text-ink sm:text-4xl">よくあるご質問</h2>
         </div>
+
+        <div class="mt-10 space-y-3">
+          <details class="group rounded-2xl border border-line bg-white p-6 shadow-sm">
+            <summary class="flex cursor-pointer items-center justify-between gap-6 font-bold text-ink">
+              <span>サービスの利用料金について教えてください。</span>
+              <span class="shrink-0 text-blue-600 transition group-open:rotate-180">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+              </span>
+            </summary>
+            <p class="mt-5 border-t border-line pt-5 text-sm leading-8 text-slate-600">
+              各サービスのご利用条件はプロダクトごとに異なります。中央競馬 払戻動画速報およびAIデイリーニュースは無料で提供しており、撮るだけ経理についてはサービスサイトにて詳細を記載しています。
+            </p>
+          </details>
+
+          <details class="group rounded-2xl border border-line bg-white p-6 shadow-sm">
+            <summary class="flex cursor-pointer items-center justify-between gap-6 font-bold text-ink">
+              <span>「撮るだけ経理」は法人決算にも対応していますか？</span>
+              <span class="shrink-0 text-blue-600 transition group-open:rotate-180">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+              </span>
+            </summary>
+            <p class="mt-5 border-t border-line pt-5 text-sm leading-8 text-slate-600">
+              主にフリーランスや個人事業主様の日常的な記帳業務の負担軽減を目的として設計しています。法人向けの複雑な決算処理や税務申告等の機能は現在提供していません。
+            </p>
+          </details>
+
+          <details class="group rounded-2xl border border-line bg-white p-6 shadow-sm">
+            <summary class="flex cursor-pointer items-center justify-between gap-6 font-bold text-ink">
+              <span>新規のシステム開発はお受けしていますか？</span>
+              <span class="shrink-0 text-blue-600 transition group-open:rotate-180">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+              </span>
+            </summary>
+            <p class="mt-5 border-t border-line pt-5 text-sm leading-8 text-slate-600">
+              現在は自社プロダクトの開発および自動化モデルの運営にリソースを集中しているため、外部企業様からの個別のシステム開発案件はお受けしていません。
+            </p>
+          </details>
+
+          <details class="group rounded-2xl border border-line bg-white p-6 shadow-sm">
+            <summary class="flex cursor-pointer items-center justify-between gap-6 font-bold text-ink">
+              <span>サービスの退会方法を教えてください。</span>
+              <span class="shrink-0 text-blue-600 transition group-open:rotate-180">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+              </span>
+            </summary>
+            <p class="mt-5 border-t border-line pt-5 text-sm leading-8 text-slate-600">
+              LINE公式アカウントのメニュー内にある「設定・連携解除」から、いつでも停止できます。
+            </p>
+          </details>
+        </div>
+      </div>
     </section>
 
-    <footer class="bg-white text-slate-400 py-10 text-center border-t border-slate-100 relative z-10 overflow-hidden">
-        <div class="container mx-auto px-6">
-            <p class="text-xs tracking-[0.2em] font-medium uppercase">&copy; 2026 Tsumugi Capital LLC. All rights reserved.</p>
+    <section id="contact" class="mesh border-t border-line py-20 lg:py-24">
+      <div class="mx-auto max-w-4xl px-5 lg:px-8">
+        <div class="rounded-[2rem] border border-white bg-white/82 p-6 shadow-lift backdrop-blur sm:p-10">
+          <div class="text-center">
+            <p class="text-xs font-black uppercase tracking-[0.24em] text-blue-600">Contact</p>
+            <h2 class="mt-3 text-3xl font-black tracking-tight text-ink sm:text-4xl">お問い合わせ</h2>
+            <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600">
+              ご不明な点やご相談がございましたら、以下のフォームよりお気軽にお尋ねください。
+            </p>
+          </div>
+
+          <form action="https://formspree.io/f/mgoqbker" method="POST" class="mt-10 grid gap-5 text-left">
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="name" class="mb-2 block text-sm font-bold text-ink">お名前 <span class="text-blue-600">必須</span></label>
+                <input type="text" id="name" name="name" required class="w-full rounded-2xl border border-line bg-white px-4 py-3 text-ink outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-50" placeholder="山田 太郎" />
+              </div>
+              <div>
+                <label for="company" class="mb-2 block text-sm font-bold text-ink">会社名</label>
+                <input type="text" id="company" name="company" class="w-full rounded-2xl border border-line bg-white px-4 py-3 text-ink outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-50" placeholder="〇〇株式会社" />
+              </div>
+            </div>
+            <div>
+              <label for="email" class="mb-2 block text-sm font-bold text-ink">メールアドレス <span class="text-blue-600">必須</span></label>
+              <input type="email" id="email" name="email" required class="w-full rounded-2xl border border-line bg-white px-4 py-3 text-ink outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-50" placeholder="example@tsumugi-capital.llc" />
+            </div>
+            <div>
+              <label for="message" class="mb-2 block text-sm font-bold text-ink">お問い合わせ内容 <span class="text-blue-600">必須</span></label>
+              <textarea id="message" name="message" rows="5" required class="w-full resize-none rounded-2xl border border-line bg-white px-4 py-3 text-ink outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-50" placeholder="ご質問やご相談内容をご記入ください。"></textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="inline-flex w-full items-center justify-center rounded-full bg-ink px-8 py-4 text-sm font-bold tracking-[0.16em] text-white shadow-calm transition hover:-translate-y-0.5 hover:bg-blue-700 sm:w-auto">
+                内容を送信する
+              </button>
+            </div>
+          </form>
         </div>
-    </footer>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line bg-white px-5 py-10 text-center">
+    <p class="text-xs font-bold uppercase tracking-[0.22em] text-slate-400">&copy; 2026 Tsumugi Capital LLC. All rights reserved.</p>
+  </footer>
 
 </body>
 </html>
