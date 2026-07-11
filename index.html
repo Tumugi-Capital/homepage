@@ -404,6 +404,38 @@
     .value-akane { background: var(--akane-pale); } .value-akane .en { color: var(--akane); }
     .value-kincha { background: var(--kincha-pale); } .value-kincha .en { color: var(--kincha); }
 
+    .company-profile {
+      margin-top: 42px;
+      padding-top: 34px;
+      border-top: 1px solid var(--line);
+    }
+    .company-profile-title {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      color: var(--ink);
+    }
+    .company-profile dl { margin-top: 20px; }
+    .company-profile dl > div {
+      display: grid;
+      grid-template-columns: 7.5em 1fr;
+      gap: 22px;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .company-profile dt {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--ai);
+    }
+    .company-profile dd {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--ink-soft);
+    }
+
     /* ---------- faq ---------- */
     #faq { background: var(--paper); border-block: 1px solid var(--line); }
     .faq-wrap { max-width: 780px; margin-inline: auto; }
@@ -536,6 +568,7 @@
       .about-kanji { display: none; }
       .about-body { padding: 34px 26px; }
       .value-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .company-profile dl > div { grid-template-columns: 6.5em 1fr; gap: 16px; }
       nav.pc { display: none; }
       .menu-btn { display: grid; }
       #contact .contact-card { padding: 44px 26px; }
@@ -838,6 +871,24 @@
               <b>時間を取り戻す</b>
             </div>
           </div>
+
+          <div class="company-profile" aria-labelledby="company-profile-title">
+            <h3 id="company-profile-title" class="company-profile-title">会社概要</h3>
+            <dl>
+              <div>
+                <dt>法人名</dt>
+                <dd>紬キャピタル合同会社</dd>
+              </div>
+              <div>
+                <dt>所在地</dt>
+                <dd>大阪府枚方市</dd>
+              </div>
+              <div>
+                <dt>事業内容</dt>
+                <dd>SaaS・AIサービスの企画、開発、運営</dd>
+              </div>
+            </dl>
+          </div>
         </div>
       </div>
     </section>
@@ -944,6 +995,7 @@
           <div>
             <h3>紬キャピタル合同会社</h3>
             <p class="en">TSUMUGI CAPITAL LLC</p>
+            <p style="font-family:var(--sans); letter-spacing:.08em; font-size:11px; color:rgba(247,245,239,.62); margin-top:8px;">大阪府枚方市</p>
           </div>
         </div>
         <nav aria-label="フッターナビゲーション">
