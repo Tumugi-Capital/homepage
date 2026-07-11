@@ -5,237 +5,727 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>紬キャピタル合同会社 | Tsumugi Capital LLC</title>
   <meta name="description" content="紬キャピタル合同会社は、経営企画・経理の実務視点とプログラミング技術を掛け合わせ、日々の業務と生活を少し軽くするSaaSを開発する会社です。" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ink: '#18212f',
-            mist: '#f6f8fb',
-            line: '#e6ebf2',
-            blue: {
-              50: '#eef7ff',
-              100: '#d9edff',
-              500: '#2f80ed',
-              600: '#1f6fd8',
-              700: '#185bb3'
-            },
-            teal: {
-              50: '#ecfbf8',
-              500: '#1aa892',
-              600: '#0f8b79'
-            },
-            gold: {
-              50: '#fff8e5',
-              500: '#c99424'
-            }
-          },
-          boxShadow: {
-            calm: '0 18px 50px rgba(24, 33, 47, 0.08)',
-            lift: '0 24px 70px rgba(24, 33, 47, 0.13)'
-          }
-        }
-      }
-    }
-  </script>
+  <meta property="og:title" content="紬キャピタル合同会社 | Tsumugi Capital LLC" />
+  <meta property="og:description" content="日々の生活に、技術で「ゆとり」を紡ぐ。実務視点とプログラミング技術を掛け合わせたSaaSを開発しています。" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet" />
+
   <style>
+    :root {
+      --kinari: #f7f5ef;        /* 生成り */
+      --paper: #fdfcf8;
+      --ink: #23252d;
+      --ink-soft: #55575f;
+      --mute: #8b8d94;
+      --ai: #2c4a7c;            /* 藍 */
+      --ai-deep: #1e3557;
+      --ai-pale: #eef2f8;
+      --akane: #b0563e;         /* 茜 */
+      --akane-pale: #f9efec;
+      --kincha: #a8842f;        /* 金茶 */
+      --kincha-pale: #f8f3e6;
+      --line: #e4e0d4;
+      --radius: 22px;
+      --serif: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif;
+      --sans: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", sans-serif;
+      --en: "Jost", "Avenir Next", "Futura", var(--sans);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      font-family: var(--sans);
+      background: var(--kinari);
+      color: var(--ink);
       -webkit-font-smoothing: antialiased;
       line-break: strict;
+      overflow-x: hidden;
     }
-    p, h1, h2, h3, li { text-wrap: pretty; }
-    .mesh {
-      background:
-        radial-gradient(circle at 16% 18%, rgba(47, 128, 237, 0.13), transparent 30%),
-        radial-gradient(circle at 90% 6%, rgba(26, 168, 146, 0.12), transparent 28%),
-        linear-gradient(135deg, #ffffff 0%, #f6f8fb 54%, #edf5ff 100%);
-    }
-    .gridline {
+
+    /* 織物の地紋(ごく薄い格子) */
+    .weave {
       background-image:
-        linear-gradient(rgba(24,33,47,.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(24,33,47,.05) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: linear-gradient(to bottom, black 0%, transparent 82%);
+        repeating-linear-gradient(0deg, rgba(44, 74, 124, 0.028) 0 1px, transparent 1px 8px),
+        repeating-linear-gradient(90deg, rgba(44, 74, 124, 0.028) 0 1px, transparent 1px 8px);
     }
-    .card {
+
+    ::selection { background: var(--ai); color: #fff; }
+
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    .container { max-width: 1120px; margin-inline: auto; padding-inline: 24px; }
+
+    .en {
+      font-family: var(--en);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* ---------- reveal(常時表示。JSが動く環境でだけ軽くフェードを乗せる) ---------- */
+    .reveal.pre { opacity: 0; transform: translateY(22px); }
+    .reveal.in { opacity: 1; transform: none; transition: opacity 0.9s cubic-bezier(.22,.61,.36,1), transform 0.9s cubic-bezier(.22,.61,.36,1); }
+    .reveal.no-anim { transition: none !important; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal.pre { opacity: 1; transform: none; }
+      * { animation: none !important; transition: none !important; }
+    }
+
+    /* ---------- header ---------- */
+    header {
+      position: sticky; top: 0; z-index: 60;
+      background: rgba(253, 252, 248, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .3s ease, box-shadow .3s ease;
+    }
+    header.scrolled {
+      border-bottom-color: var(--line);
+      box-shadow: 0 10px 34px rgba(30, 53, 87, 0.06);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-block: 18px;
+    }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand-mark {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--ai-deep);
+      color: var(--kinari);
+      font-family: var(--serif); font-weight: 600; font-size: 22px;
+      display: grid; place-items: center;
+      box-shadow: 0 8px 22px rgba(30, 53, 87, 0.25);
+    }
+    .brand-name { font-family: var(--serif); font-size: 19px; font-weight: 600; letter-spacing: 0.12em; }
+    .brand-sub { font-size: 10px; color: var(--mute); letter-spacing: 0.28em; margin-top: 2px; }
+
+    nav.pc { display: flex; align-items: center; gap: 34px; }
+    nav.pc a { font-size: 12px; letter-spacing: 0.2em; font-weight: 600; color: var(--ink-soft); position: relative; padding-block: 6px; font-family: var(--en); }
+    nav.pc a::after {
+      content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%;
+      background: var(--ai); transform: scaleX(0); transform-origin: right; transition: transform .35s ease;
+    }
+    nav.pc a:hover { color: var(--ai); }
+    nav.pc a:hover::after { transform: scaleX(1); transform-origin: left; }
+    nav.pc a.cta {
+      background: var(--ink); color: #fff; padding: 12px 26px; border-radius: 999px;
+      transition: background .3s ease, transform .3s ease;
+    }
+    nav.pc a.cta::after { display: none; }
+    nav.pc a.cta:hover { background: var(--ai); color: #fff; transform: translateY(-1px); }
+
+    .menu-btn {
+      display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 12px;
+      background: var(--paper); cursor: pointer; place-items: center;
+    }
+    .menu-btn span { display: block; width: 18px; height: 2px; background: var(--ink); position: relative; transition: background .2s; }
+    .menu-btn span::before, .menu-btn span::after {
+      content: ""; position: absolute; left: 0; width: 18px; height: 2px; background: var(--ink); transition: transform .3s ease, top .3s ease;
+    }
+    .menu-btn span::before { top: -6px; }
+    .menu-btn span::after { top: 6px; }
+    body.menu-open .menu-btn span { background: transparent; }
+    body.menu-open .menu-btn span::before { top: 0; transform: rotate(45deg); }
+    body.menu-open .menu-btn span::after { top: 0; transform: rotate(-45deg); }
+
+    .mobile-nav {
+      display: none;
+      position: fixed; inset: 0; z-index: 55;
+      background: rgba(247, 245, 239, 0.97);
+      backdrop-filter: blur(10px);
+      padding: 120px 32px 40px;
+    }
+    body.menu-open .mobile-nav { display: block; }
+    .mobile-nav a {
+      display: block; padding: 20px 4px; border-bottom: 1px solid var(--line);
+      font-family: var(--serif); font-size: 20px; letter-spacing: 0.1em;
+    }
+    .mobile-nav a small { display: block; font-family: var(--en); font-size: 10px; letter-spacing: 0.3em; color: var(--ai); margin-bottom: 6px; }
+
+    /* ---------- hero ---------- */
+    .hero {
+      position: relative;
+      padding: 110px 0 130px;
+      overflow: hidden;
+    }
+    .hero-kanji {
+      position: absolute; top: 50%; right: -3%;
+      transform: translateY(-52%);
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(300px, 44vw, 560px);
+      line-height: 1; color: rgba(44, 74, 124, 0.055);
+      user-select: none; pointer-events: none;
+    }
+    .hero-thread {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    .hero-thread path {
+      fill: none; stroke: rgba(44, 74, 124, 0.16); stroke-width: 1.2;
+      stroke-dasharray: 2400; stroke-dashoffset: 2400;
+      animation: draw 3.2s ease-out .3s forwards;
+    }
+    .hero-thread path:nth-child(2) { stroke: rgba(176, 86, 62, 0.14); animation-delay: .7s; animation-duration: 3.8s; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+
+    .hero-inner { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid var(--line); background: rgba(253, 252, 248, 0.8);
+      border-radius: 999px; padding: 9px 20px;
+      font-size: 10.5px; color: var(--ai);
+    }
+    .hero-badge i { width: 7px; height: 7px; border-radius: 50%; background: var(--akane); animation: pulse 2.6s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1);} 50% { opacity: .45; transform: scale(.8);} }
+
+    .hero h2 {
+      margin-top: 36px;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(2.35rem, 5.6vw, 4.3rem);
+      line-height: 1.42;
+      letter-spacing: 0.06em;
+    }
+    .hero h2 .yutori {
+      color: var(--ai);
+      padding-inline: 2px;
+      background: linear-gradient(transparent 68%, rgba(44, 74, 124, 0.14) 68% 94%, transparent 94%);
+    }
+    .hero p.lead {
+      margin-top: 30px; max-width: 34em;
+      font-size: 15.5px; line-height: 2.3; color: var(--ink-soft);
+    }
+    .hero-actions { margin-top: 42px; display: flex; flex-wrap: wrap; gap: 14px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      border-radius: 999px; padding: 17px 36px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.14em;
+      transition: transform .3s ease, box-shadow .3s ease, background .3s ease, color .3s ease, border-color .3s ease;
+    }
+    .btn svg { transition: transform .3s ease; }
+    .btn:hover svg { transform: translateX(4px); }
+    .btn-primary { background: var(--ai-deep); color: #fff; box-shadow: 0 14px 34px rgba(30, 53, 87, 0.22); }
+    .btn-primary:hover { background: var(--ai); transform: translateY(-2px); box-shadow: 0 20px 44px rgba(30, 53, 87, 0.28); }
+    .btn-ghost { border: 1px solid var(--line); background: rgba(253, 252, 248, 0.75); color: var(--ink); }
+    .btn-ghost:hover { border-color: var(--ai); color: var(--ai); transform: translateY(-2px); }
+
+    .hero-vertical {
+      writing-mode: vertical-rl;
+      font-family: var(--serif);
+      font-size: 15px; letter-spacing: 0.34em; line-height: 2.5;
+      color: var(--ink-soft);
+      border-left: 1px solid var(--line);
+      padding-left: 30px;
+      height: 12.5em;
+      align-self: center;
+    }
+    .hero-vertical b { color: var(--ai); font-weight: 600; }
+
+    /* ---------- theme strip ---------- */
+    .themes { position: relative; margin-top: 84px; }
+    .themes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .theme-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px 28px;
+      position: relative;
+      overflow: hidden;
       transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
     }
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(47, 128, 237, .32);
-      box-shadow: 0 24px 70px rgba(24, 33, 47, 0.13);
+    .theme-card:hover { transform: translateY(-4px); box-shadow: 0 22px 54px rgba(30,53,87,.1); border-color: rgba(44,74,124,.3); }
+    .theme-card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--accent, var(--ai));
+      opacity: .85;
     }
-    details > summary { list-style: none; }
-    details > summary::-webkit-details-marker { display: none; }
+    .theme-num { font-family: var(--en); font-size: 12px; letter-spacing: .3em; color: var(--accent, var(--ai)); }
+    .theme-card h4 { font-family: var(--serif); font-size: 18px; font-weight: 600; margin-top: 12px; letter-spacing: .06em; }
+    .theme-card p { margin-top: 12px; font-size: 13.5px; line-height: 2.1; color: var(--ink-soft); }
+
+    /* ---------- section head ---------- */
+    section { position: relative; }
+    section[id] { scroll-margin-top: 92px; }
+    .sec { padding: 110px 0; }
+    .sec-head { margin-bottom: 64px; }
+    .sec-label {
+      display: flex; align-items: center; gap: 16px;
+      font-size: 11px; color: var(--ai); font-family: var(--en); letter-spacing: .3em; font-weight: 600;
+    }
+    .sec-label::before { content: ""; width: 42px; height: 1px; background: var(--ai); }
+    .sec-head h2 {
+      margin-top: 18px;
+      font-family: var(--serif); font-weight: 600;
+      font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+      letter-spacing: 0.08em; line-height: 1.5;
+    }
+    .sec-head p.desc { margin-top: 20px; max-width: 38em; font-size: 14.5px; line-height: 2.2; color: var(--ink-soft); text-wrap: balance; }
+
+    /* ---------- products ---------- */
+    #products { background: var(--paper); border-block: 1px solid var(--line); }
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .product {
+      display: flex; flex-direction: column;
+      background: var(--kinari);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      position: relative;
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease, background .35s ease;
+    }
+    .product:hover {
+      transform: translateY(-6px);
+      background: var(--paper);
+      border-color: rgba(44,74,124,.32);
+      box-shadow: 0 28px 64px rgba(30, 53, 87, 0.12);
+    }
+    .product-top { display: flex; align-items: flex-start; justify-content: space-between; }
+    .product-num {
+      font-family: var(--en); font-size: 13px; letter-spacing: .26em; color: var(--mute);
+    }
+    .product-tag {
+      font-family: var(--en); font-size: 9.5px; letter-spacing: .22em; font-weight: 600;
+      padding: 7px 14px; border-radius: 999px;
+    }
+    .tag-ai { background: var(--ai-pale); color: var(--ai); }
+    .tag-akane { background: var(--akane-pale); color: var(--akane); }
+    .tag-kincha { background: var(--kincha-pale); color: var(--kincha); }
+
+    .product-visual {
+      margin-top: 28px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    .product-visual svg { width: 100%; height: auto; transition: transform .45s ease; }
+    .product:hover .product-visual svg { transform: scale(1.03); }
+    .visual-ai { background: var(--ai-pale); }
+    .visual-akane { background: var(--akane-pale); }
+    .visual-kincha { background: var(--kincha-pale); }
+
+    .product h3 { margin-top: 26px; font-family: var(--serif); font-size: 23px; font-weight: 600; letter-spacing: .05em; line-height: 1.5; }
+    .product .en-sub { margin-top: 10px; font-size: 10px; color: var(--mute); letter-spacing: .2em; }
+    .product p.body { margin-top: 20px; font-size: 13.5px; line-height: 2.2; color: var(--ink-soft); flex: 1; }
+    .product-link {
+      margin-top: 26px; display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700; letter-spacing: .12em; color: var(--ai);
+    }
+    .product-link svg { transition: transform .3s ease; }
+    .product-link:hover svg { transform: translateX(4px); }
+
+    /* ---------- about ---------- */
+    #about .about-grid {
+      display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: start;
+    }
+    .about-sticky { position: sticky; top: 130px; }
+    .about-kanji {
+      margin-top: 40px;
+      font-family: var(--serif); font-size: clamp(120px, 16vw, 200px); line-height: 1;
+      color: rgba(44, 74, 124, 0.08); font-weight: 500; user-select: none;
+    }
+    .about-body {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 6px);
+      padding: 52px;
+      box-shadow: 0 24px 60px rgba(30, 53, 87, 0.07);
+    }
+    .about-body p { font-size: 15.5px; line-height: 2.4; color: var(--ink-soft); }
+    .about-body p + p { margin-top: 28px; }
+    .about-body p strong { color: var(--ink); font-weight: 700; }
+
+    .value-grid { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .value {
+      border-radius: 16px; padding: 20px 8px; text-align: center;
+      border: 1px solid var(--line);
+    }
+    .value .en { display: block; font-size: 9px; letter-spacing: .26em; margin-bottom: 10px; }
+    .value b { font-family: var(--serif); font-size: 14px; letter-spacing: .04em; font-weight: 600; white-space: nowrap; }
+    .value-ai { background: var(--ai-pale); } .value-ai .en { color: var(--ai); }
+    .value-akane { background: var(--akane-pale); } .value-akane .en { color: var(--akane); }
+    .value-kincha { background: var(--kincha-pale); } .value-kincha .en { color: var(--kincha); }
+
+    /* ---------- faq ---------- */
+    #faq { background: var(--paper); border-block: 1px solid var(--line); }
+    .faq-wrap { max-width: 780px; margin-inline: auto; }
+    .faq-wrap .sec-head { text-align: center; }
+    .faq-wrap .sec-label { justify-content: center; }
+    .faq-wrap .sec-label::after { content: ""; width: 42px; height: 1px; background: var(--ai); }
+
+    details {
+      background: var(--kinari);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      transition: border-color .3s ease, box-shadow .3s ease;
+    }
+    details + details { margin-top: 14px; }
+    details[open] { border-color: rgba(44,74,124,.35); box-shadow: 0 16px 40px rgba(30,53,87,.08); background: var(--paper); }
+    summary {
+      list-style: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      padding: 26px 28px;
+      font-weight: 700; font-size: 15px; letter-spacing: .04em;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary .q-mark {
+      font-family: var(--serif); color: var(--ai); font-size: 18px; margin-right: 14px; font-weight: 600;
+    }
+    summary .toggle {
+      flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+      border: 1px solid var(--line); background: var(--paper);
+      display: grid; place-items: center; position: relative;
+      transition: background .3s ease, border-color .3s ease;
+    }
+    summary .toggle::before, summary .toggle::after {
+      content: ""; position: absolute; background: var(--ai); transition: transform .3s ease;
+    }
+    summary .toggle::before { width: 12px; height: 1.5px; }
+    summary .toggle::after { width: 1.5px; height: 12px; }
+    details[open] summary .toggle { background: var(--ai); border-color: var(--ai); }
+    details[open] summary .toggle::before, details[open] summary .toggle::after { background: #fff; }
+    details[open] summary .toggle::after { transform: rotate(90deg); }
+    .answer {
+      padding: 0 28px 28px;
+      display: flex; gap: 14px;
+    }
+    .answer .a-mark { font-family: var(--serif); color: var(--akane); font-size: 18px; font-weight: 600; line-height: 1.9; }
+    .answer p { font-size: 14px; line-height: 2.2; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 20px; flex: 1; }
+    .answer .a-mark { border-top: 1px solid var(--line); padding-top: 20px; }
+
+    /* ---------- contact ---------- */
+    #contact .contact-card {
+      max-width: 820px; margin-inline: auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 10px);
+      padding: 64px;
+      box-shadow: 0 30px 70px rgba(30, 53, 87, 0.09);
+      position: relative;
+      overflow: hidden;
+    }
+    #contact .contact-card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--ai) 0 34%, var(--akane) 34% 67%, var(--kincha) 67% 100%);
+      opacity: .8;
+    }
+    #contact .sec-head { text-align: center; margin-bottom: 48px; }
+    #contact .sec-label { justify-content: center; }
+    #contact .sec-label::after { content: ""; width: 42px; height: 1px; background: var(--ai); }
+    #contact .sec-head p.desc { margin-inline: auto; }
+
+    .form-grid { display: grid; gap: 26px; text-align: left; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+    label { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; margin-bottom: 10px; letter-spacing: .04em; }
+    .req {
+      font-size: 9.5px; font-weight: 700; letter-spacing: .1em;
+      color: #fff; background: var(--akane); border-radius: 5px; padding: 3px 8px;
+    }
+    .opt {
+      font-size: 9.5px; font-weight: 700; letter-spacing: .1em;
+      color: var(--mute); background: var(--kinari); border: 1px solid var(--line); border-radius: 5px; padding: 2px 8px;
+    }
+    input, textarea {
+      width: 100%;
+      font-family: var(--sans); font-size: 15px; color: var(--ink);
+      background: var(--kinari);
+      border: 1px solid var(--line); border-radius: 14px;
+      padding: 16px 18px;
+      outline: none;
+      transition: border-color .3s ease, box-shadow .3s ease, background .3s ease;
+    }
+    input::placeholder, textarea::placeholder { color: #b4b2a9; }
+    input:focus, textarea:focus {
+      border-color: var(--ai); background: var(--paper);
+      box-shadow: 0 0 0 4px rgba(44, 74, 124, 0.1);
+    }
+    textarea { resize: none; min-height: 160px; line-height: 1.9; }
+    .form-submit { text-align: center; margin-top: 8px; }
+
+    /* ---------- footer ---------- */
+    footer {
+      background: var(--ai-deep);
+      color: rgba(247, 245, 239, 0.85);
+      padding: 70px 0 40px;
+    }
+    .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
+    .footer-brand .brand-mark { background: rgba(247,245,239,.12); color: var(--kinari); box-shadow: none; }
+    .footer-brand { display: flex; gap: 16px; align-items: center; }
+    .footer-brand h3 { font-family: var(--serif); font-size: 18px; font-weight: 600; letter-spacing: .12em; color: var(--kinari); }
+    .footer-brand p { font-size: 10px; letter-spacing: .28em; color: rgba(247,245,239,.5); margin-top: 4px; }
+    footer nav { display: flex; gap: 30px; }
+    footer nav a { font-family: var(--en); font-size: 11px; letter-spacing: .22em; color: rgba(247,245,239,.65); transition: color .3s; }
+    footer nav a:hover { color: var(--kinari); }
+    .footer-bottom {
+      margin-top: 54px; padding-top: 26px;
+      border-top: 1px solid rgba(247,245,239,.14);
+      display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .footer-bottom p { font-family: var(--en); font-size: 10px; letter-spacing: .24em; color: rgba(247,245,239,.45); }
+    .footer-tagline { font-family: var(--serif); font-size: 12px; letter-spacing: .3em; color: rgba(247,245,239,.55); }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-vertical { display: none; }
+      .themes-grid, .products-grid { grid-template-columns: 1fr; }
+      #about .about-grid { grid-template-columns: 1fr; gap: 36px; }
+      .about-sticky { position: static; }
+      .about-kanji { display: none; }
+      .about-body { padding: 34px 26px; }
+      .value-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      nav.pc { display: none; }
+      .menu-btn { display: grid; }
+      #contact .contact-card { padding: 44px 26px; }
+      .form-row { grid-template-columns: 1fr; }
+      .sec { padding: 80px 0; }
+      .hero { padding: 70px 0 90px; }
+      .hero-kanji { right: -22%; opacity: .8; }
+    }
+    @media (max-width: 520px) {
+      .value-grid { grid-template-columns: 1fr; }
+      .hero h2 { font-size: 1.85rem; }
+      .hero p.lead { font-size: 14px; }
+      summary { padding: 22px 20px; font-size: 14px; }
+      .answer { padding: 0 20px 22px; }
+    }
   </style>
 </head>
-<body class="bg-mist text-ink antialiased">
+<body class="weave">
 
-  <header class="sticky top-0 z-50 border-b border-line/80 bg-white/86 backdrop-blur-xl">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
-      <a href="#" class="group block" aria-label="紬キャピタル合同会社 トップへ">
-        <p class="text-[10px] font-bold uppercase tracking-[0.26em] text-blue-600 transition group-hover:text-teal-600">Technology that leaves room</p>
-        <h1 class="mt-1 text-lg font-extrabold tracking-[0.16em] text-ink sm:text-xl">
-          紬キャピタル<span class="text-blue-600">合同会社</span>
-        </h1>
+  <header id="header">
+    <div class="container header-inner">
+      <a href="#" class="brand" aria-label="紬キャピタル合同会社 トップへ">
+        <span class="brand-mark" aria-hidden="true">紬</span>
+        <span>
+          <span class="brand-name">紬キャピタル<span style="color:var(--ai)">合同会社</span></span>
+          <span class="brand-sub en" style="display:block">TSUMUGI CAPITAL LLC</span>
+        </span>
       </a>
 
-      <nav class="hidden items-center gap-8 md:flex">
-        <a href="#products" class="text-xs font-bold tracking-[0.18em] text-slate-600 transition hover:text-blue-600">PRODUCT</a>
-        <a href="#about" class="text-xs font-bold tracking-[0.18em] text-slate-600 transition hover:text-blue-600">ABOUT</a>
-        <a href="#faq" class="text-xs font-bold tracking-[0.18em] text-slate-600 transition hover:text-blue-600">FAQ</a>
-        <a href="#contact" class="rounded-full bg-ink px-5 py-2.5 text-xs font-bold tracking-[0.16em] text-white transition hover:bg-blue-700">CONTACT</a>
+      <nav class="pc" aria-label="メインナビゲーション">
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="cta">Contact</a>
       </nav>
+
+      <button class="menu-btn" id="menuBtn" aria-label="メニューを開閉" aria-expanded="false"><span></span></button>
     </div>
   </header>
 
+  <div class="mobile-nav" id="mobileNav">
+    <nav aria-label="モバイルナビゲーション">
+      <a href="#products"><small>Products</small>開発プロダクト</a>
+      <a href="#about"><small>About</small>会社について</a>
+      <a href="#faq"><small>FAQ</small>よくあるご質問</a>
+      <a href="#contact"><small>Contact</small>お問い合わせ</a>
+    </nav>
+  </div>
+
   <main>
-    <section class="mesh relative overflow-hidden border-b border-line">
-      <div class="gridline pointer-events-none absolute inset-0"></div>
-      <div class="mx-auto grid max-w-7xl gap-14 px-5 py-20 lg:grid-cols-[1.08fr_.92fr] lg:items-center lg:px-8 lg:py-28">
-        <div class="relative z-10">
-          <div class="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/78 px-4 py-2 text-xs font-bold tracking-[0.14em] text-blue-700 shadow-sm">
-            <span class="h-2 w-2 rounded-full bg-teal-500"></span>
-            BUSINESS, ENTERTAINMENT AND TECHNOLOGY
-          </div>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <svg class="hero-thread" viewBox="0 0 1440 720" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-40,530 C240,470 380,610 640,540 C900,470 1040,320 1480,390" />
+        <path d="M-40,570 C260,520 420,650 700,575 C960,505 1120,370 1480,440" />
+      </svg>
+      <p class="hero-kanji" aria-hidden="true">紬</p>
 
-          <h2 class="mt-8 max-w-4xl text-[2.4rem] font-black leading-[1.14] tracking-tight text-ink sm:text-6xl lg:text-7xl">
-            日々の生活に<br class="hidden sm:block" />
-            技術で<span class="text-blue-600">ゆとり</span>を紡ぎだす。
-          </h2>
+      <div class="container hero-inner">
+        <div>
+          <span class="hero-badge en reveal in"><i></i>Business, Entertainment and Technology</span>
 
-          <p class="mt-7 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+          <h2 class="reveal in">日々の生活に、<br />技術で<span class="yutori">ゆとり</span>を紡ぐ。</h2>
+
+          <p class="lead reveal in">
             紬キャピタルは、経営企画・経理の実務視点とプログラミング技術を掛け合わせ、面倒な作業を軽減し、人の時間を本来の仕事や楽しみへ取り戻すSaaSを開発しています。
           </p>
 
-          <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-            <a href="#products" class="inline-flex items-center justify-center rounded-full bg-blue-600 px-7 py-4 text-sm font-bold tracking-[0.14em] text-white shadow-calm transition hover:-translate-y-0.5 hover:bg-blue-700">
-              PRODUCTSを見る
+          <div class="hero-actions reveal in">
+            <a href="#products" class="btn btn-primary">
+              開発プロダクトを見る
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
             </a>
-            <a href="#about" class="inline-flex items-center justify-center rounded-full border border-line bg-white/80 px-7 py-4 text-sm font-bold tracking-[0.14em] text-ink transition hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-700">
-              会社について
-            </a>
+            <a href="#about" class="btn btn-ghost">会社について</a>
           </div>
         </div>
 
-        <div class="relative z-10">
-          <div class="rounded-[2rem] border border-white bg-white/72 p-4 shadow-lift backdrop-blur">
-            <div class="rounded-[1.5rem] border border-line bg-white p-6">
-              <div class="flex items-center justify-between border-b border-line pb-5">
-                <div>
-                  <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Operating Theme</p>
-                  <p class="mt-2 text-xl font-extrabold text-ink">Small automation, real relief.</p>
-                </div>
-                <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
-                  <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M12 3v18"></path>
-                    <path d="M5 8h14"></path>
-                    <path d="M5 16h14"></path>
-                    <path d="m7 4 10 16"></path>
-                  </svg>
-                </div>
-              </div>
+        <aside class="hero-vertical" aria-hidden="true">実務の視点と、<br /><b>技術のちから</b>を、<br />一本の糸に。</aside>
+      </div>
 
-              <div class="mt-6 grid gap-3">
-                <div class="rounded-2xl bg-blue-50 p-4">
-                  <p class="text-sm font-bold text-blue-700">01. 業務の負担を減らす</p>
-                  <p class="mt-1 text-sm leading-6 text-slate-600">領収書処理や情報整理など、後回しになりがちな作業を軽減します。</p>
-                </div>
-                <div class="rounded-2xl bg-teal-50 p-4">
-                  <p class="text-sm font-bold text-teal-600">02. 趣味の時間を豊かにする</p>
-                  <p class="mt-1 text-sm leading-6 text-slate-600">エンタメ領域でも、確認や通知の手間を自動化します。</p>
-                </div>
-                <div class="rounded-2xl bg-gold-50 p-4">
-                  <p class="text-sm font-bold text-gold-500">03. 必要な情報だけ届ける</p>
-                  <p class="mt-1 text-sm leading-6 text-slate-600">AIを使い、膨大な情報から日々の判断に役立つものを絞り込みます。</p>
-                </div>
-              </div>
-            </div>
+      <div class="container themes">
+        <div class="themes-grid">
+          <div class="theme-card reveal" style="--accent: var(--ai)">
+            <p class="theme-num">01 — WORK</p>
+            <h4>業務の負担を減らす</h4>
+            <p>領収書処理や情報整理など、後回しになりがちな作業を軽減します。</p>
+          </div>
+          <div class="theme-card reveal" style="--accent: var(--akane)">
+            <p class="theme-num">02 — LIFE</p>
+            <h4>趣味の時間を豊かにする</h4>
+            <p>エンタメ領域でも、確認や通知の手間を自動化します。</p>
+          </div>
+          <div class="theme-card reveal" style="--accent: var(--kincha)">
+            <p class="theme-num">03 — INFORMATION</p>
+            <h4>必要な情報だけ届ける</h4>
+            <p>AIを使い、膨大な情報から日々の判断に役立つものを絞り込みます。</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="products" class="bg-white py-20 lg:py-24">
-      <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div>
-            <p class="text-xs font-black uppercase tracking-[0.24em] text-blue-600">Our Products</p>
-            <h2 class="mt-3 text-3xl font-black tracking-tight text-ink sm:text-5xl">開発プロダクト</h2>
-          </div>
-          <p class="max-w-xl text-sm leading-7 text-slate-600">
+    <!-- ============ PRODUCTS ============ -->
+    <section id="products" class="sec">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="sec-label">Our Products</p>
+          <h2>開発プロダクト</h2>
+          <p class="desc">
             大きな機能の追加より、毎日の小さな面倒をきちんと減らす。そんな思想で、実務と生活に近いプロダクトを育てています。
           </p>
         </div>
 
-        <div class="mt-12 grid gap-5 md:grid-cols-3">
-          <article class="card rounded-[1.6rem] border border-line bg-white p-7 shadow-calm">
-            <div class="mb-7 flex items-start justify-between gap-4">
-              <div class="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.6rem] bg-gradient-to-br from-blue-50 to-white text-blue-600 shadow-calm ring-1 ring-blue-100">
-                <span class="absolute -right-1.5 -top-1.5 h-5 w-5 rounded-full bg-teal-50 ring-4 ring-white"></span>
-                <span class="absolute bottom-3 right-3 h-2.5 w-2.5 rounded-full bg-blue-200"></span>
-                <svg class="relative h-10 w-10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
-                  <path d="M9 7h6"></path>
-                  <path d="M9 11h6"></path>
-                  <path d="M9 15h2"></path>
-                  <path d="M14 15h1"></path>
-                </svg>
-              </div>
-              <span class="rounded-full bg-blue-50 px-3 py-1 text-[11px] font-bold tracking-[0.14em] text-blue-700">ACCOUNTING</span>
+        <div class="products-grid">
+          <article class="product reveal">
+            <div class="product-top">
+              <span class="product-num">01</span>
+              <span class="product-tag tag-ai">Accounting</span>
             </div>
-            <h3 class="text-2xl font-black text-ink">撮るだけ経理</h3>
-            <p class="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Accounting SaaS for small business</p>
-            <p class="mt-5 text-sm leading-8 text-slate-600">
+            <div class="product-visual visual-ai">
+              <svg viewBox="0 0 320 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LINEに領収書を送るとAIが仕訳候補を返すイメージ">
+                <!-- 送信バブル(領収書写真) -->
+                <rect x="170" y="16" width="132" height="66" rx="15" fill="#2c4a7c"/>
+                <rect x="186" y="27" width="34" height="44" rx="3" fill="#fdfcf8"/>
+                <path d="M186 66 l4 3 4-3 4 3 4-3 4 3 4-3 4 3 4-3 2 1.5" fill="none" stroke="#dde4ee" stroke-width="1.4"/>
+                <rect x="191" y="33" width="24" height="3" rx="1.5" fill="#b9c4d6"/>
+                <rect x="191" y="40" width="24" height="3" rx="1.5" fill="#b9c4d6"/>
+                <rect x="191" y="47" width="17" height="3" rx="1.5" fill="#b9c4d6"/>
+                <rect x="191" y="57" width="24" height="3.5" rx="1.75" fill="#2c4a7c" opacity=".55"/>
+                <circle cx="252" cy="41" r="13" fill="none" stroke="#fdfcf8" stroke-width="1.6" opacity=".9"/>
+                <circle cx="252" cy="41" r="5.5" fill="none" stroke="#fdfcf8" stroke-width="1.6" opacity=".9"/>
+                <rect x="246" y="24.5" width="12" height="4" rx="2" fill="#fdfcf8" opacity=".9"/>
+                <text x="236" y="70" font-size="9.5" fill="#dde4ee" letter-spacing="1">撮って送るだけ</text>
+                <!-- 接続ドット -->
+                <circle cx="160" cy="88" r="2" fill="#2c4a7c" opacity=".35"/>
+                <circle cx="150" cy="93" r="2" fill="#2c4a7c" opacity=".55"/>
+                <!-- 返信バブル(仕訳候補) -->
+                <rect x="18" y="86" width="186" height="74" rx="15" fill="#fdfcf8" stroke="#dde4ee"/>
+                <text x="34" y="107" font-size="10" font-weight="700" fill="#2c4a7c" letter-spacing="1">仕訳候補</text>
+                <circle cx="186" cy="103" r="9" fill="#3e8e63"/>
+                <path d="M182 103 l3 3 5.5-6" fill="none" stroke="#fdfcf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="34" y="116" width="66" height="6" rx="3" fill="#dde4ee"/>
+                <rect x="118" y="116" width="52" height="6" rx="3" fill="#eef2f8" stroke="#dde4ee" stroke-width=".8"/>
+                <rect x="34" y="130" width="50" height="6" rx="3" fill="#dde4ee"/>
+                <rect x="118" y="130" width="52" height="6" rx="3" fill="#eef2f8" stroke="#dde4ee" stroke-width=".8"/>
+                <rect x="34" y="144" width="136" height="7" rx="3.5" fill="#2c4a7c" opacity=".14"/>
+              </svg>
+            </div>
+            <h3>撮るだけ経理</h3>
+            <p class="en-sub en">Accounting SaaS for Small Business</p>
+            <p class="body">
               LINEに領収書を送るだけで、AIが内容を読み取り、仕訳候補の作成からMoney Forwardへの記帳・証憑添付までをサポートします。
             </p>
+            <a class="product-link" href="https://tumugi-capital.github.io/torudakekeiri/" target="_blank" rel="noopener">
+              サービスサイトへ
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            </a>
           </article>
 
-          <article class="card rounded-[1.6rem] border border-line bg-white p-7 shadow-calm">
-            <div class="mb-7 flex items-start justify-between gap-4">
-              <div class="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.6rem] bg-gradient-to-br from-teal-50 to-white text-teal-600 shadow-calm ring-1 ring-teal-100">
-                <span class="absolute -right-1.5 -top-1.5 h-5 w-5 rounded-full bg-blue-50 ring-4 ring-white"></span>
-                <span class="absolute bottom-3 right-3 h-2.5 w-2.5 rounded-full bg-teal-200"></span>
-                <svg class="relative h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M12 3a9 9 0 0 0-9 9v8h3v-8a6 6 0 0 1 12 0v8h3v-8a9 9 0 0 0-9-9z"></path>
-                  <path d="M8 14h.01"></path>
-                  <path d="M16 14h.01"></path>
-                  <path d="M8 18h.01"></path>
-                  <path d="M16 18h.01"></path>
-                  <path d="M10 7h4"></path>
-                </svg>
-              </div>
-              <span class="rounded-full bg-teal-50 px-3 py-1 text-[11px] font-bold tracking-[0.14em] text-teal-600">ENTERTAINMENT</span>
+          <article class="product reveal">
+            <div class="product-top">
+              <span class="product-num">02</span>
+              <span class="product-tag tag-akane">Entertainment</span>
             </div>
-            <h3 class="text-2xl font-black text-ink">中央競馬 払戻動画速報</h3>
-            <p class="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Entertainment automation</p>
-            <p class="mt-5 text-sm leading-8 text-slate-600">
+            <div class="product-visual visual-akane">
+              <svg viewBox="0 0 320 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="確定した払戻結果を動画でLINEに速報するイメージ">
+                <!-- 動画プレーヤー -->
+                <rect x="18" y="20" width="192" height="122" rx="13" fill="#fdfcf8" stroke="#eedcd4"/>
+                <rect x="28" y="30" width="172" height="82" rx="8" fill="#f6e4dc"/>
+                <ellipse cx="114" cy="71" rx="62" ry="26" fill="none" stroke="#b0563e" stroke-width="1.4" stroke-dasharray="5 5" opacity=".45"/>
+                <circle cx="114" cy="71" r="19" fill="#b0563e"/>
+                <path d="M109 63 l15 8 -15 8 z" fill="#fdfcf8"/>
+                <rect x="36" y="37" width="36" height="15" rx="7.5" fill="#b0563e"/>
+                <text x="54" y="48" font-size="8.5" font-weight="700" fill="#fdfcf8" text-anchor="middle" letter-spacing="2">確定</text>
+                <rect x="28" y="122" width="172" height="5" rx="2.5" fill="#f0e0d9"/>
+                <rect x="28" y="122" width="96" height="5" rx="2.5" fill="#b0563e"/>
+                <circle cx="124" cy="124.5" r="5" fill="#b0563e"/>
+                <!-- 結果カード -->
+                <rect x="222" y="26" width="80" height="110" rx="13" fill="#fdfcf8" stroke="#eedcd4"/>
+                <path d="M248 60 v-6 a14 14 0 1 1 28 0 v6" fill="none" stroke="#b0563e" stroke-width="5" stroke-linecap="round" transform="translate(-14 -2)"/>
+                <circle cx="240" cy="56" r="1.8" fill="#b0563e"/>
+                <circle cx="256" cy="41" r="1.8" fill="#b0563e"/>
+                <circle cx="272" cy="56" r="1.8" fill="#b0563e"/>
+                <!-- 着順 -->
+                <circle cx="240" cy="86" r="8" fill="#b0563e"/>
+                <text x="240" y="89.5" font-size="9" font-weight="700" fill="#fdfcf8" text-anchor="middle">1</text>
+                <rect x="254" y="82.5" width="38" height="7" rx="3.5" fill="#f0e0d9"/>
+                <circle cx="240" cy="106" r="8" fill="#b0563e" opacity=".55"/>
+                <text x="240" y="109.5" font-size="9" font-weight="700" fill="#fdfcf8" text-anchor="middle">2</text>
+                <rect x="254" y="102.5" width="30" height="7" rx="3.5" fill="#f6e8e2"/>
+                <circle cx="240" cy="126" r="8" fill="#b0563e" opacity=".3"/>
+                <text x="240" y="129.5" font-size="9" font-weight="700" fill="#fdfcf8" text-anchor="middle">3</text>
+                <rect x="254" y="122.5" width="34" height="7" rx="3.5" fill="#f6e8e2"/>
+              </svg>
+            </div>
+            <h3>中央競馬 払戻動画速報</h3>
+            <p class="en-sub en">Entertainment Automation</p>
+            <p class="body">
               中央競馬の確定結果をLINEへ即時通知。外出先でも結果を確認しやすく、週末の趣味時間をよりスムーズに楽しめるようにします。
             </p>
           </article>
 
-          <article class="card rounded-[1.6rem] border border-line bg-white p-7 shadow-calm">
-            <div class="mb-7 flex items-start justify-between gap-4">
-              <div class="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.6rem] bg-gradient-to-br from-gold-50 to-white text-gold-500 shadow-calm ring-1 ring-yellow-100">
-                <span class="absolute -right-1.5 -top-1.5 h-5 w-5 rounded-full bg-blue-50 ring-4 ring-white"></span>
-                <span class="absolute bottom-3 right-3 h-2.5 w-2.5 rounded-full bg-yellow-200"></span>
-                <svg class="relative h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M5 5h14"></path>
-                  <path d="M5 10h14"></path>
-                  <path d="M5 15h8"></path>
-                  <path d="M17 15l2 2"></path>
-                  <path d="M19 15l-2 2"></path>
-                  <path d="M8 20h8"></path>
-                </svg>
-              </div>
-              <span class="rounded-full bg-gold-50 px-3 py-1 text-[11px] font-bold tracking-[0.14em] text-gold-500">AI CURATION</span>
+          <article class="product reveal">
+            <div class="product-top">
+              <span class="product-num">03</span>
+              <span class="product-tag tag-kincha">AI Curation</span>
             </div>
-            <h3 class="text-2xl font-black text-ink">AIデイリーニュース</h3>
-            <p class="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">AI daily news curation</p>
-            <p class="mt-5 text-sm leading-8 text-slate-600">
+            <div class="product-visual visual-kincha">
+              <svg viewBox="0 0 320 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="大量のニュースをAIが選別して必要な情報だけ届けるイメージ">
+                <!-- 大量の記事(上段・薄く) -->
+                <g opacity=".6">
+                  <g transform="rotate(-4 66 40)">
+                    <rect x="28" y="20" width="76" height="40" rx="8" fill="#fdfcf8" stroke="#e8e0cc"/>
+                    <rect x="38" y="30" width="44" height="5" rx="2.5" fill="#e7dcc2"/>
+                    <rect x="38" y="42" width="56" height="5" rx="2.5" fill="#f0e9d8"/>
+                  </g>
+                  <g>
+                    <rect x="122" y="14" width="76" height="40" rx="8" fill="#fdfcf8" stroke="#e8e0cc"/>
+                    <rect x="132" y="24" width="50" height="5" rx="2.5" fill="#e7dcc2"/>
+                    <rect x="132" y="36" width="38" height="5" rx="2.5" fill="#f0e9d8"/>
+                  </g>
+                  <g transform="rotate(4 254 40)">
+                    <rect x="216" y="20" width="76" height="40" rx="8" fill="#fdfcf8" stroke="#e8e0cc"/>
+                    <rect x="226" y="30" width="40" height="5" rx="2.5" fill="#e7dcc2"/>
+                    <rect x="226" y="42" width="54" height="5" rx="2.5" fill="#f0e9d8"/>
+                  </g>
+                </g>
+                <!-- AIで絞り込み -->
+                <path d="M74 64 q40 22 66 26 M160 60 v28 M246 64 q-40 22 -66 26" fill="none" stroke="#a8842f" stroke-width="1.3" stroke-dasharray="3 4" opacity=".55"/>
+                <rect x="134" y="92" width="52" height="22" rx="11" fill="#a8842f"/>
+                <text x="160" y="107" font-size="11" font-weight="700" fill="#fdfcf8" text-anchor="middle" letter-spacing="2">AI</text>
+                <path d="M126 95 l2.4 5 5 2.4 -5 2.4 -2.4 5 -2.4 -5 -5 -2.4 5 -2.4 z" fill="#a8842f" opacity=".7"/>
+                <path d="M194 108 l1.8 3.8 3.8 1.8 -3.8 1.8 -1.8 3.8 -1.8 -3.8 -3.8 -1.8 3.8 -1.8 z" fill="#a8842f" opacity=".5"/>
+                <!-- 届く1枚(下段・くっきり) -->
+                <rect x="68" y="124" width="184" height="40" rx="10" fill="#fdfcf8" stroke="#a8842f" stroke-opacity=".45"/>
+                <circle cx="90" cy="144" r="9" fill="#f8f3e6" stroke="#a8842f" stroke-opacity=".6"/>
+                <path d="M86 144 l3 3 5.5-6" fill="none" stroke="#a8842f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="110" y="134" width="112" height="6" rx="3" fill="#e7dcc2"/>
+                <rect x="110" y="148" width="80" height="6" rx="3" fill="#f0e9d8"/>
+              </svg>
+            </div>
+            <h3>AIデイリーニュース</h3>
+            <p class="en-sub en">AI Daily News Curation</p>
+            <p class="body">
               あふれるニュースの中から、必要な情報だけをAIが整理。毎日の情報収集にかかる時間を減らし、判断の土台を整えます。
             </p>
           </article>
@@ -243,129 +733,122 @@
       </div>
     </section>
 
-    <section id="about" class="border-y border-line bg-mist py-20 lg:py-24">
-      <div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[.85fr_1.15fr] lg:px-8">
-        <div>
-          <p class="text-xs font-black uppercase tracking-[0.24em] text-blue-600">About Tsumugi Capital</p>
-          <h2 class="mt-3 text-3xl font-black leading-tight tracking-tight text-ink sm:text-5xl">現場感覚と、<br>技術実装力を紡ぐ。</h2>
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="sec">
+      <div class="container about-grid">
+        <div class="about-sticky reveal">
+          <p class="sec-label">About Tsumugi Capital</p>
+          <h2 class="sec-head" style="margin-bottom:0;">
+            <span style="display:block; font-family:var(--serif); font-weight:600; font-size:clamp(1.9rem,3.6vw,2.9rem); letter-spacing:.08em; line-height:1.6; margin-top:18px;">
+              現場感覚と、<br />技術実装力を紡ぐ。
+            </span>
+          </h2>
+          <p class="about-kanji" aria-hidden="true">紡</p>
         </div>
-        <div class="rounded-[1.6rem] border border-line bg-white p-7 shadow-calm lg:p-10">
-          <p class="text-lg leading-9 text-slate-700">
-            私たちは、企業における経営企画・経理の実務経験で培った「現場のリアルな視点」と、それを解決するための「プログラミング技術」を掛け合わせたサービス開発を行っています。
+
+        <div class="about-body reveal">
+          <p>
+            私たちは、企業における経営企画・経理の実務経験で培った<strong>「現場のリアルな視点」</strong>と、それを解決するための<strong>「プログラミング技術」</strong>を掛け合わせたサービス開発を行っています。
           </p>
-          <p class="mt-6 text-lg leading-9 text-slate-700">
+          <p>
             単なるシステム開発にとどまらず、ビジネスの効率化とエンターテインメントの体験向上を通じて、利用者の皆様の時間と選択肢を少しずつ広げていくことを目指しています。
           </p>
-          <div class="mt-8 grid gap-3 sm:grid-cols-3">
-            <div class="rounded-2xl bg-blue-50 p-4">
-              <p class="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Viewpoint</p>
-              <p class="mt-2 font-black text-ink">実務起点</p>
+
+          <div class="value-grid">
+            <div class="value value-ai">
+              <span class="en">Viewpoint</span>
+              <b>実務起点</b>
             </div>
-            <div class="rounded-2xl bg-teal-50 p-4">
-              <p class="text-xs font-bold uppercase tracking-[0.18em] text-teal-600">Build</p>
-              <p class="mt-2 font-black text-ink">小さく早く改善</p>
+            <div class="value value-akane">
+              <span class="en">Build</span>
+              <b>小さく早く改善</b>
             </div>
-            <div class="rounded-2xl bg-gold-50 p-4">
-              <p class="text-xs font-bold uppercase tracking-[0.18em] text-gold-500">Goal</p>
-              <p class="mt-2 font-black text-ink">時間を取り戻す</p>
+            <div class="value value-kincha">
+              <span class="en">Goal</span>
+              <b>時間を取り戻す</b>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="faq" class="bg-white py-20 lg:py-24">
-      <div class="mx-auto max-w-4xl px-5 lg:px-8">
-        <div class="text-center">
-          <p class="text-xs font-black uppercase tracking-[0.24em] text-blue-600">FAQ</p>
-          <h2 class="mt-3 text-3xl font-black tracking-tight text-ink sm:text-4xl">よくあるご質問</h2>
+    <!-- ============ FAQ ============ -->
+    <section id="faq" class="sec">
+      <div class="container faq-wrap">
+        <div class="sec-head reveal">
+          <p class="sec-label">FAQ</p>
+          <h2>よくあるご質問</h2>
         </div>
 
-        <div class="mt-10 space-y-3">
-          <details class="group rounded-2xl border border-line bg-white p-6 shadow-sm">
-            <summary class="flex cursor-pointer items-center justify-between gap-6 font-bold text-ink">
-              <span>サービスの利用料金について教えてください。</span>
-              <span class="shrink-0 text-blue-600 transition group-open:rotate-180">
-                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
-              </span>
-            </summary>
-            <p class="mt-5 border-t border-line pt-5 text-sm leading-8 text-slate-600">
-              各サービスのご利用条件はプロダクトごとに異なります。中央競馬 払戻動画速報およびAIデイリーニュースは無料で提供しており、撮るだけ経理についてはサービスサイトにて詳細を記載しています。
-            </p>
+        <div class="reveal">
+          <details>
+            <summary><span><span class="q-mark">Q.</span>サービスの利用料金について教えてください。</span><span class="toggle" aria-hidden="true"></span></summary>
+            <div class="answer">
+              <span class="a-mark">A.</span>
+              <p>各サービスのご利用条件はプロダクトごとに異なります。中央競馬 払戻動画速報およびAIデイリーニュースは無料で提供しており、撮るだけ経理についてはサービスサイトにて詳細を記載しています。</p>
+            </div>
           </details>
 
-          <details class="group rounded-2xl border border-line bg-white p-6 shadow-sm">
-            <summary class="flex cursor-pointer items-center justify-between gap-6 font-bold text-ink">
-              <span>「撮るだけ経理」は法人決算にも対応していますか？</span>
-              <span class="shrink-0 text-blue-600 transition group-open:rotate-180">
-                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
-              </span>
-            </summary>
-            <p class="mt-5 border-t border-line pt-5 text-sm leading-8 text-slate-600">
-              主にフリーランスや個人事業主様の日常的な記帳業務の負担軽減を目的として設計しています。法人向けの複雑な決算処理や税務申告等の機能は現在提供していません。
-            </p>
+          <details>
+            <summary><span><span class="q-mark">Q.</span>「撮るだけ経理」は法人決算にも対応していますか？</span><span class="toggle" aria-hidden="true"></span></summary>
+            <div class="answer">
+              <span class="a-mark">A.</span>
+              <p>主にフリーランスや個人事業主様の日常的な記帳業務の負担軽減を目的として設計しています。法人向けの複雑な決算処理や税務申告等の機能は現在提供していません。</p>
+            </div>
           </details>
 
-          <details class="group rounded-2xl border border-line bg-white p-6 shadow-sm">
-            <summary class="flex cursor-pointer items-center justify-between gap-6 font-bold text-ink">
-              <span>新規のシステム開発は受けていますか？</span>
-              <span class="shrink-0 text-blue-600 transition group-open:rotate-180">
-                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
-              </span>
-            </summary>
-            <p class="mt-5 border-t border-line pt-5 text-sm leading-8 text-slate-600">
-              現在は自社プロダクトの開発および自動化モデルの運営にリソースを集中しているため、外部企業様からの個別のシステム開発案件はお受けしていません。
-            </p>
+          <details>
+            <summary><span><span class="q-mark">Q.</span>新規のシステム開発は受けていますか？</span><span class="toggle" aria-hidden="true"></span></summary>
+            <div class="answer">
+              <span class="a-mark">A.</span>
+              <p>現在は自社プロダクトの開発および自動化モデルの運営にリソースを集中しているため、外部企業様からの個別のシステム開発案件はお受けしていません。</p>
+            </div>
           </details>
 
-          <details class="group rounded-2xl border border-line bg-white p-6 shadow-sm">
-            <summary class="flex cursor-pointer items-center justify-between gap-6 font-bold text-ink">
-              <span>サービスの退会方法を教えてください。</span>
-              <span class="shrink-0 text-blue-600 transition group-open:rotate-180">
-                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
-              </span>
-            </summary>
-            <p class="mt-5 border-t border-line pt-5 text-sm leading-8 text-slate-600">
-              LINE公式アカウントのメニュー内にある「設定・連携解除」から、いつでも停止できます。
-            </p>
+          <details>
+            <summary><span><span class="q-mark">Q.</span>サービスの退会方法を教えてください。</span><span class="toggle" aria-hidden="true"></span></summary>
+            <div class="answer">
+              <span class="a-mark">A.</span>
+              <p>LINE公式アカウントのメニュー内にある「設定・連携解除」から、いつでも停止できます。</p>
+            </div>
           </details>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="mesh border-t border-line py-20 lg:py-24">
-      <div class="mx-auto max-w-4xl px-5 lg:px-8">
-        <div class="rounded-[2rem] border border-white bg-white/82 p-6 shadow-lift backdrop-blur sm:p-10">
-          <div class="text-center">
-            <p class="text-xs font-black uppercase tracking-[0.24em] text-blue-600">Contact</p>
-            <h2 class="mt-3 text-3xl font-black tracking-tight text-ink sm:text-4xl">お問い合わせ</h2>
-            <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600">
-              ご不明な点やご相談がございましたら、以下のフォームよりお気軽にお尋ねください。
-            </p>
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="sec">
+      <div class="container">
+        <div class="contact-card reveal">
+          <div class="sec-head">
+            <p class="sec-label">Contact</p>
+            <h2>お問い合わせ</h2>
+            <p class="desc">ご不明な点やご相談がございましたら、以下のフォームよりお気軽にお尋ねください。</p>
           </div>
 
-          <form action="https://formspree.io/f/mgoqbker" method="POST" class="mt-10 grid gap-5 text-left">
-            <div class="grid gap-5 sm:grid-cols-2">
+          <form action="https://formspree.io/f/mgoqbker" method="POST" class="form-grid">
+            <div class="form-row">
               <div>
-                <label for="name" class="mb-2 block text-sm font-bold text-ink">お名前 <span class="text-blue-600">必須</span></label>
-                <input type="text" id="name" name="name" required class="w-full rounded-2xl border border-line bg-white px-4 py-3 text-ink outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-50" placeholder="山田 太郎" />
+                <label for="name">お名前 <span class="req">必須</span></label>
+                <input type="text" id="name" name="name" required autocomplete="name" placeholder="山田 太郎" />
               </div>
               <div>
-                <label for="company" class="mb-2 block text-sm font-bold text-ink">会社名</label>
-                <input type="text" id="company" name="company" class="w-full rounded-2xl border border-line bg-white px-4 py-3 text-ink outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-50" placeholder="〇〇株式会社" />
+                <label for="company">会社名 <span class="opt">任意</span></label>
+                <input type="text" id="company" name="company" autocomplete="organization" placeholder="〇〇株式会社" />
               </div>
             </div>
             <div>
-              <label for="email" class="mb-2 block text-sm font-bold text-ink">メールアドレス <span class="text-blue-600">必須</span></label>
-              <input type="email" id="email" name="email" required class="w-full rounded-2xl border border-line bg-white px-4 py-3 text-ink outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-50" placeholder="example@tsumugi-capital.llc" />
+              <label for="email">メールアドレス <span class="req">必須</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="example@tsumugi-capital.llc" />
             </div>
             <div>
-              <label for="message" class="mb-2 block text-sm font-bold text-ink">お問い合わせ内容 <span class="text-blue-600">必須</span></label>
-              <textarea id="message" name="message" rows="5" required class="w-full resize-none rounded-2xl border border-line bg-white px-4 py-3 text-ink outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-50" placeholder="ご質問やご相談内容をご記入ください。"></textarea>
+              <label for="message">お問い合わせ内容 <span class="req">必須</span></label>
+              <textarea id="message" name="message" rows="5" required placeholder="ご質問やご相談内容をご記入ください。"></textarea>
             </div>
-            <div class="text-center">
-              <button type="submit" class="inline-flex w-full items-center justify-center rounded-full bg-ink px-8 py-4 text-sm font-bold tracking-[0.16em] text-white shadow-calm transition hover:-translate-y-0.5 hover:bg-blue-700 sm:w-auto">
+            <div class="form-submit">
+              <button type="submit" class="btn btn-primary" style="border:none; cursor:pointer; font-family:var(--sans);">
                 内容を送信する
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
               </button>
             </div>
           </form>
@@ -374,9 +857,75 @@
     </section>
   </main>
 
-  <footer class="border-t border-line bg-white px-5 py-10 text-center">
-    <p class="text-xs font-bold uppercase tracking-[0.22em] text-slate-400">&copy; 2026 Tsumugi Capital LLC. All rights reserved.</p>
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">紬</span>
+          <div>
+            <h3>紬キャピタル合同会社</h3>
+            <p class="en">TSUMUGI CAPITAL LLC</p>
+          </div>
+        </div>
+        <nav aria-label="フッターナビゲーション">
+          <a href="#products">Products</a>
+          <a href="#about">About</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-tagline">技術で、ゆとりを紡ぐ。</p>
+        <p>&copy; 2026 Tsumugi Capital LLC. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
 
+  <script>
+    // ヘッダーのスクロール影
+    const header = document.getElementById('header');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // モバイルメニュー
+    const menuBtn = document.getElementById('menuBtn');
+    menuBtn.addEventListener('click', () => {
+      const open = document.body.classList.toggle('menu-open');
+      menuBtn.setAttribute('aria-expanded', open);
+    });
+    document.querySelectorAll('.mobile-nav a').forEach(a =>
+      a.addEventListener('click', () => {
+        document.body.classList.remove('menu-open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      })
+    );
+
+    // スクロールで要素をフェードイン。
+    // 画面外の要素だけを一時的に隠し、スクロールで順次表示する。
+    // 万一スクロール検知が働かない環境でも、一定時間後に必ず全表示する。
+    const pres = [];
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (!el.classList.contains('in') && el.getBoundingClientRect().top > innerHeight * 0.92) {
+        el.classList.add('pre');
+        pres.push(el);
+      }
+    });
+    const revealCheck = () => {
+      pres.forEach(el => {
+        if (!el.classList.contains('in') && el.getBoundingClientRect().top < innerHeight * 0.94) {
+          el.classList.add('in');
+        }
+      });
+    };
+    window.addEventListener('scroll', revealCheck, { passive: true });
+    window.addEventListener('resize', revealCheck, { passive: true });
+    revealCheck();
+    setTimeout(() => pres.forEach(el => {
+      if (!el.classList.contains('in')) el.classList.add('no-anim');
+      el.classList.add('in');
+    }), 1800);
+  </script>
 </body>
 </html>
