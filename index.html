@@ -4,10 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>紬キャピタル合同会社 | Tsumugi Capital LLC</title>
-  <meta name="description" content="紬キャピタル合同会社は、経営企画・経理の実務視点とプログラミング技術を<br>掛け合わせ、日々の業務と生活を少し軽くするSaaSを開発する会社です。" />
+  <meta name="description" content="紬キャピタル合同会社は、経営企画・経理の実務視点とプログラミング技術を掛け合わせ、日々の業務と生活を少し軽くするSaaSを開発しています。主力プロダクト「撮るだけ経理」のβ版ユーザーを募集中です。" />
+  <link rel="canonical" href="https://tumugi-capital.github.io/homepage/" />
   <meta property="og:title" content="紬キャピタル合同会社 | Tsumugi Capital LLC" />
-  <meta property="og:description" content="日々の生活に、技術で「ゆとり」を紡ぐ。実務視点とプログラミング技術を掛け合わせたSaaSを開発しています。" />
+  <meta property="og:description" content="日々の生活に、技術で「ゆとり」を紡ぐ。実務起点のSaaSを開発し、主力プロダクト「撮るだけ経理」のβ版ユーザーを募集しています。" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tumugi-capital.github.io/homepage/" />
+  <meta name="twitter:card" content="summary" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -205,6 +208,8 @@
       font-size: 15.5px; line-height: 2.3; color: var(--ink-soft);
     }
     .hero-actions { margin-top: 42px; display: flex; flex-wrap: wrap; gap: 14px; }
+    .hero-note { margin-top: 18px; display: flex; align-items: center; gap: 9px; font-size: 12px; color: var(--ink-soft); }
+    .hero-note::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--akane); box-shadow: 0 0 0 5px rgba(176,86,62,.1); }
 
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -273,7 +278,7 @@
 
     /* ---------- products ---------- */
     #products { background: var(--paper); border-block: 1px solid var(--line); }
-    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .products-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
     .product {
       display: flex; flex-direction: column;
       background: var(--kinari);
@@ -283,6 +288,50 @@
       position: relative;
       transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease, background .35s ease;
     }
+    .product-featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      gap: 42px;
+      align-items: center;
+      padding: 44px;
+      background: linear-gradient(135deg, var(--ai-pale), var(--paper));
+      border-color: rgba(44,74,124,.3);
+      box-shadow: 0 24px 62px rgba(30,53,87,.1);
+    }
+    .product-featured::before {
+      content: "MAIN PRODUCT";
+      position: absolute;
+      top: 0;
+      left: 44px;
+      transform: translateY(-50%);
+      border-radius: 999px;
+      background: var(--ai-deep);
+      color: #fff;
+      padding: 8px 18px;
+      font-family: var(--en);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .24em;
+    }
+    .product-featured .product-visual { margin-top: 0; background: var(--paper); }
+    .product-content { display: flex; min-width: 0; flex-direction: column; align-self: stretch; }
+    .product-featured h3 { margin-top: 22px; font-size: clamp(27px, 3vw, 36px); }
+    .product-points { margin-top: 22px; display: grid; gap: 9px; }
+    .product-points li { display: flex; gap: 10px; font-size: 13px; line-height: 1.8; color: var(--ink-soft); }
+    .product-points li::before { content: "✓"; flex-shrink: 0; color: var(--ai); font-weight: 700; }
+    .product-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .product-action {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      border-radius: 999px; padding: 13px 22px;
+      font-size: 12px; font-weight: 700; letter-spacing: .1em;
+      transition: transform .3s ease, background .3s ease, color .3s ease, border-color .3s ease;
+    }
+    .product-action.primary { background: var(--ai-deep); color: #fff; }
+    .product-action.primary:hover { background: var(--ai); transform: translateY(-2px); }
+    .product-action.secondary { border: 1px solid rgba(44,74,124,.35); background: var(--paper); color: var(--ai); }
+    .product-action.secondary:hover { border-color: var(--ai); transform: translateY(-2px); }
+    .product-status { margin-top: 24px; font-family: var(--en); font-size: 9px; letter-spacing: .22em; color: var(--mute); }
     .product:hover {
       transform: translateY(-6px);
       background: var(--paper);
@@ -478,6 +527,10 @@
       .hero-inner { grid-template-columns: 1fr; }
       .hero-vertical { display: none; }
       .themes-grid, .products-grid { grid-template-columns: 1fr; }
+      .product-featured { grid-column: auto; grid-template-columns: 1fr; gap: 26px; padding: 40px 30px 34px; }
+      .product-featured::before { left: 30px; }
+      .product-featured .product-visual { order: 2; }
+      .product-featured .product-content { order: 1; }
       #about .about-grid { grid-template-columns: 1fr; gap: 36px; }
       .about-sticky { position: static; }
       .about-kanji { display: none; }
@@ -495,6 +548,8 @@
       .value-grid { grid-template-columns: 1fr; }
       .hero h2 { font-size: 1.85rem; }
       .hero p.lead { font-size: 14px; }
+      .product-actions { display: grid; }
+      .product-action { width: 100%; }
       summary { padding: 22px 20px; font-size: 14px; }
       .answer { padding: 0 20px 22px; }
     }
@@ -516,7 +571,8 @@
         <a href="#products">Products</a>
         <a href="#about">About</a>
         <a href="#faq">FAQ</a>
-        <a href="#contact" class="cta">Contact</a>
+        <a href="#contact">Contact</a>
+        <a href="https://tumugi-capital.github.io/torudakekeiri/" class="cta" target="_blank" rel="noopener">撮るだけ経理</a>
       </nav>
 
       <button class="menu-btn" id="menuBtn" aria-label="メニューを開閉" aria-expanded="false"><span></span></button>
@@ -529,6 +585,7 @@
       <a href="#about"><small>About</small>会社について</a>
       <a href="#faq"><small>FAQ</small>よくあるご質問</a>
       <a href="#contact"><small>Contact</small>お問い合わせ</a>
+      <a href="https://tumugi-capital.github.io/torudakekeiri/" target="_blank" rel="noopener"><small>Main Product</small>撮るだけ経理を試す</a>
     </nav>
   </div>
 
@@ -552,12 +609,13 @@
           </p>
 
           <div class="hero-actions reveal in">
-            <a href="#products" class="btn btn-primary">
-              開発プロダクトを見る
+            <a href="https://tumugi-capital.github.io/torudakekeiri/" class="btn btn-primary" target="_blank" rel="noopener">
+              撮るだけ経理を試す
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
             </a>
-            <a href="#about" class="btn btn-ghost">会社について</a>
+            <a href="#products" class="btn btn-ghost">開発プロダクトを見る</a>
           </div>
+          <p class="hero-note reveal in">主力プロダクト「撮るだけ経理」β版ユーザー募集中</p>
         </div>
 
         <aside class="hero-vertical" aria-hidden="true">実務の視点と、<br /><b>技術のちから</b>を、<br />一本の糸に。</aside>
@@ -568,7 +626,7 @@
           <div class="theme-card reveal" style="--accent: var(--ai)">
             <p class="theme-num">01 — WORK</p>
             <h4>業務の負担を減らす</h4>
-            <p>領収書処理や情報整理など、後回しになりがちな作業を軽減します。</p>
+            <p>領収書・請求書処理や情報整理など、後回しになりがちな作業を軽減します。</p>
           </div>
           <div class="theme-card reveal" style="--accent: var(--akane)">
             <p class="theme-num">02 — LIFE</p>
@@ -591,16 +649,12 @@
           <p class="sec-label">Our Products</p>
           <h2>開発プロダクト</h2>
           <p class="desc">
-            大きな機能の追加より、毎日の小さな面倒をきちんと減らす。そんな思想で、実務と生活に近いプロダクトを育てています。
+            主力プロダクト「撮るだけ経理」を中心に、毎日の小さな面倒をきちんと減らすサービスを育てています。エンターテインメントや情報整理の領域でも、小さな実験と改善を続けています。
           </p>
         </div>
 
         <div class="products-grid">
-          <article class="product reveal">
-            <div class="product-top">
-              <span class="product-num">01</span>
-              <span class="product-tag tag-ai">Accounting</span>
-            </div>
+          <article class="product product-featured reveal">
             <div class="product-visual visual-ai">
               <svg viewBox="0 0 320 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LINEに領収書を送るとAIが仕訳候補を返すイメージ">
                 <!-- 送信バブル(領収書写真) -->
@@ -630,21 +684,35 @@
                 <rect x="34" y="144" width="136" height="7" rx="3.5" fill="#2c4a7c" opacity=".14"/>
               </svg>
             </div>
-            <h3>撮るだけ経理</h3>
-            <p class="en-sub en">Accounting SaaS for Small Business</p>
-            <p class="body">
-              LINEに領収書を送るだけで、AIが内容を読み取り、仕訳候補の作成からMoney Forwardへの記帳・証憑添付までをサポートします。
-            </p>
-            <a class="product-link" href="https://tumugi-capital.github.io/torudakekeiri/" target="_blank" rel="noopener">
-              サービスサイトへ
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-            </a>
+            <div class="product-content">
+              <div class="product-top">
+                <span class="product-num">01</span>
+                <span class="product-tag tag-ai">β User Recruiting</span>
+              </div>
+              <h3>撮るだけ経理</h3>
+              <p class="en-sub en">Accounting SaaS for Small Business</p>
+              <p class="body">
+                レシート画像やPDF請求書をLINEに送るだけで、AIが仕訳候補を作成。取引先や用途メモの補足、Money Forward・freeeへの記帳、弥生会計向けCSV出力まで、個人事業主・フリーランス・小規模法人の日常経理を支援します。
+              </p>
+              <ul class="product-points">
+                <li>レシート画像・PDF請求書をLINEでAI解析</li>
+                <li>Money Forward・freeeへの記帳をサポート</li>
+                <li>弥生会計向けCSV出力にも対応</li>
+              </ul>
+              <div class="product-actions">
+                <a class="product-action primary" href="https://tumugi-capital.github.io/torudakekeiri/" target="_blank" rel="noopener">
+                  β版・サービス詳細
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </a>
+                <a class="product-action secondary" href="https://lin.ee/8zc0VBd" target="_blank" rel="noopener">LINEで試す</a>
+              </div>
+            </div>
           </article>
 
           <article class="product reveal">
             <div class="product-top">
               <span class="product-num">02</span>
-              <span class="product-tag tag-akane">Entertainment</span>
+              <span class="product-tag tag-akane">Experimental</span>
             </div>
             <div class="product-visual visual-akane">
               <svg viewBox="0 0 320 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="確定した払戻結果を動画でLINEに速報するイメージ">
@@ -682,12 +750,13 @@
             <p class="body">
               中央競馬の確定結果をLINEへ即時通知。外出先でも結果を確認しやすく、週末の趣味時間をよりスムーズに楽しめるようにします。
             </p>
+            <p class="product-status">EXPERIMENTAL PRODUCT</p>
           </article>
 
           <article class="product reveal">
             <div class="product-top">
               <span class="product-num">03</span>
-              <span class="product-tag tag-kincha">AI Curation</span>
+              <span class="product-tag tag-kincha">Experimental</span>
             </div>
             <div class="product-visual visual-kincha">
               <svg viewBox="0 0 320 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="大量のニュースをAIが選別して必要な情報だけ届けるイメージ">
@@ -728,6 +797,7 @@
             <p class="body">
               あふれるニュースの中から、必要な情報だけをAIが整理。毎日の情報収集にかかる時間を減らし、判断の土台を整えます。
             </p>
+            <p class="product-status">EXPERIMENTAL PRODUCT</p>
           </article>
         </div>
       </div>
@@ -793,7 +863,15 @@
             <summary><span><span class="q-mark">Q.</span>「撮るだけ経理」は法人決算にも対応していますか？</span><span class="toggle" aria-hidden="true"></span></summary>
             <div class="answer">
               <span class="a-mark">A.</span>
-              <p>主にフリーランスや個人事業主様の日常的な記帳業務の負担軽減を目的として設計しています。法人向けの複雑な決算処理や税務申告等の機能は現在提供していません。</p>
+              <p>個人事業主・フリーランス・経理担当者のいない小規模法人の日常的な会計入力を支援します。レシートやPDF請求書の読み取り、仕訳候補作成、対応する会計ソフトへの反映をサポートしますが、法人決算や税務申告そのものを行うサービスではありません。</p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span><span class="q-mark">Q.</span>「撮るだけ経理」はどの会計ソフトに対応していますか？</span><span class="toggle" aria-hidden="true"></span></summary>
+            <div class="answer">
+              <span class="a-mark">A.</span>
+              <p>PREMIUM PLANでは、Money Forward・freeeへの記帳サポートと、弥生会計向けCSV出力に対応しています。レシート画像だけでなくPDF請求書もLINEに送って解析できます。詳細や最新の提供条件はサービスサイトをご確認ください。</p>
             </div>
           </details>
 
@@ -873,6 +951,7 @@
           <a href="#about">About</a>
           <a href="#faq">FAQ</a>
           <a href="#contact">Contact</a>
+          <a href="https://tumugi-capital.github.io/torudakekeiri/" target="_blank" rel="noopener">撮るだけ経理</a>
         </nav>
       </div>
       <div class="footer-bottom">
